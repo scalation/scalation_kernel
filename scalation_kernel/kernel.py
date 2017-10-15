@@ -1,4 +1,10 @@
 
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# @author  Michael Cotterell
+# @version 1.0
+# @see     LICENSE (MIT style license file).
+#::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 from ipykernel.kernelbase import Kernel
 
 import os
@@ -18,6 +24,10 @@ SCALA_OPTIONS = ['-Dscala.color',
                  '-cp', SCALATION_JARS]
 
 class ScalaTionKernel(Kernel):
+    """A Scala+ScalaTion kernel for Jupyter. It uses the system or container's 
+    Scala installation for the underlying REPL. This implementation uses 
+    ipykernel and pexpect to allow the kernel to easily interact with the REPL.
+    """
 
     implementation = 'scalation'
     implementation_version = '1.0'
@@ -58,9 +68,9 @@ class ScalaTionKernel(Kernel):
             for code_line in code.splitlines():
                 self.child.sendline(code_line)
                 self.child.expect(SCALA_PROMPT)
-                child_output = self.child.before
-                lines = child_output.splitlines()
-                for line in lines[2:len(lines)-1]:
+                child_output = self.child.before   # entire output
+                lines = child_output.splitlines()  # breakup into lines
+                for line in lines[2:len(lines)-1]: # ignore first two and last lines
                     stream_content = {'name': 'stdout', 'text': '{}\n'.format(line)}
                     self.send_response(self.iopub_socket, 'stream', stream_content)
 
