@@ -3,6 +3,8 @@
 This project provides a Scala+ScalaTion kernel for Jupyter. It uses the system
 or container's Scala installation.
 
+[Imgur](https://i.imgur.com/BlgAPsq.png)
+
 ## Python Dependencies
 
 Below are the Python packages that this project directly depends on:
@@ -36,5 +38,5 @@ $ python3 -m jupyter notebook
 ## Using the ScalaTion kernel
 
 **Notebook**: The *New* menu in the notebook should show an option for a
-ScalaTion notebook.
+"ScalaTion" notebook.
 
