@@ -7,6 +7,13 @@ or container's Scala installation.
 
 * Add ScalaTion to class path.
 
+## Python Dependencies
+
+Below are the Python packages that this project directly depends on:
+
+* pexpect (>=4.2.1)
+* ipykernel (>=4.6.1)
+
 ## Installation
 
 To install the developer version of ```scalation_kernel``` using PIP:
