@@ -1,6 +1,7 @@
 
 from ipykernel.kernelbase import Kernel
 
+import os
 import pexpect
 import re
 
@@ -9,8 +10,12 @@ SCALATION_KERNEL_AUTHORS = 'Michael E. Cotterell, John A. Miller'
 SCALATION_KERNEL_LICENSE = 'MIT'
 
 SCALATION_VERSION = '1.3'
+SCALATION_JARS    = ':'.join([os.environ['SCALATION_MATHSTAT_JAR'],
+                              os.environ['SCALATION_MODELING_JAR']])
 
-SCALA_PROMPT      = 'scala> '
+SCALA_PROMPT  = 'scala> '
+SCALA_OPTIONS = ['-Dscala.color',
+                 '-cp', SCALATION_JARS]
 
 class ScalaTionKernel(Kernel):
 
@@ -43,20 +48,21 @@ class ScalaTionKernel(Kernel):
 
     def __init__(self, **kwargs):
         Kernel.__init__(self, **kwargs)
-        self.child = pexpect.spawnu('scala', ['-Dscala.color'])
+        self.child = pexpect.spawnu('scala', SCALA_OPTIONS)
         self.child.expect(SCALA_PROMPT)
     
     def do_execute(self, code, silent, store_history=True, user_expressions=None,
                    allow_stdin=False):
 
         if not silent:
-            self.child.sendline(code)
-            self.child.expect(SCALA_PROMPT)
-            child_output = self.child.before
-            lines = child_output.splitlines()
-            for line in lines[2:len(lines)-1]:
-                stream_content = {'name': 'stdout', 'text': '{}\n'.format(line)}
-                self.send_response(self.iopub_socket, 'stream', stream_content)
+            for code_line in code.splitlines():
+                self.child.sendline(code_line)
+                self.child.expect(SCALA_PROMPT)
+                child_output = self.child.before
+                lines = child_output.splitlines()
+                for line in lines[2:len(lines)-1]:
+                    stream_content = {'name': 'stdout', 'text': '{}\n'.format(line)}
+                    self.send_response(self.iopub_socket, 'stream', stream_content)
 
         return {'status': 'ok',
                 'execution_count': self.execution_count,

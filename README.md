@@ -3,10 +3,6 @@
 This project provides a Scala+ScalaTion kernel for Jupyter. It uses the system
 or container's Scala installation.
 
-## TODO
-
-* Add ScalaTion to class path.
-
 ## Python Dependencies
 
 Below are the Python packages that this project directly depends on:
@@ -24,6 +20,13 @@ $ python3 -m scalation_kernel.install
 ```
 
 ## Run Jupyter
+
+Before you run Jupyter, you need to make sure the following environment
+variables are set with the full paths to the ScalaTion JAR files:
+```
+$ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat_2.12-1.3.jar
+$ export SCALATION_MODELING_JAR=/path/to/scalation_modeling_2.12-1.3.jar
+```
 
 To run Jupyter, you might use the following command:
 ```
