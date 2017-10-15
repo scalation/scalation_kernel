@@ -60,7 +60,34 @@ class ScalaTionKernel(Kernel):
         Kernel.__init__(self, **kwargs)
         self.child = pexpect.spawnu('scala', SCALA_OPTIONS)
         self.child.expect(SCALA_PROMPT)
-    
+
+    def send_html_response(self, html_content):
+        """Send an HTML response."""
+        
+        html = {
+            'data': {
+                'text/html': '{}'.format(html_content)
+            },
+            'metadata': {}
+        }
+        self.send_response(self.iopub_socket, 'display_data', html)
+        
+    def send_pretty_response(self, line):
+        """Send a pretty response for supported REPL outputs."""
+        # TODO finish
+
+        regex   = r"^(.*)(?:\:\s)(.*)(?:\s=\s*)([\s\S]*)"
+        matches = re.findall(regex, line)
+
+        self.send_html_response('<strong>Attempting to pretty print...</strong>')
+        self.send_html_response('<p>len(matches) = {}</p>'.format(len(matches)))
+
+        if len(matches) == 1:
+            var_name, var_type, var_val = matches[0]
+            self.send_html_response('<code>{}: {}</code><br />{}'.format(var_name,
+                                                                         var_type,
+                                                                         var_val))
+        
     def do_execute(self, code, silent, store_history=True, user_expressions=None,
                    allow_stdin=False):
 
@@ -70,10 +97,12 @@ class ScalaTionKernel(Kernel):
                 self.child.expect(SCALA_PROMPT)
                 child_output = self.child.before   # entire output
                 lines = child_output.splitlines()  # breakup into lines
-                for line in lines[2:len(lines)-1]: # ignore first two and last lines
-                    stream_content = {'name': 'stdout', 'text': '{}\n'.format(line)}
-                    self.send_response(self.iopub_socket, 'stream', stream_content)
-
+                lines = lines[2:len(lines)-1]      # ignore first two and last lines
+                lines = '\n'.join(lines)           # rejoin the lines
+                stream_content = {'name': 'stdout', 'text': '{}\n'.format(lines)}
+                self.send_response(self.iopub_socket, 'stream', stream_content)
+                # self.send_pretty_response(lines)
+        
         return {'status': 'ok',
                 'execution_count': self.execution_count,
                 'payload': [],
