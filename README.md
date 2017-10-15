@@ -11,8 +11,8 @@ or container's Scala installation.
 
 Below are the Python packages that this project directly depends on:
 
-* pexpect (>=4.2.1)
-* ipykernel (>=4.6.1)
+* ```pexpect``` (>=4.2.1)
+* ```ipykernel``` (>=4.6.1)
 
 ## Installation
 
