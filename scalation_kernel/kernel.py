@@ -79,14 +79,14 @@ class ScalaTionKernel(Kernel):
         regex   = r"^(.*)(?:\:\s)(.*)(?:\s=\s*)([\s\S]*)"
         matches = re.findall(regex, line)
 
-        self.send_html_response('<strong>Attempting to pretty print...</strong>')
-        self.send_html_response('<p>len(matches) = {}</p>'.format(len(matches)))
-
         if len(matches) == 1:
+            self.send_html_response('<strong>Pretty Print Information</strong>')
             var_name, var_type, var_val = matches[0]
-            self.send_html_response('<code>{}: {}</code><br />{}'.format(var_name,
-                                                                         var_type,
-                                                                         var_val))
+            response_str = '<table><tr><td>{}</td><td>{}</td></tr><tr><td>{}</td><td>{}</td></tr><tr><td>{}</td><td>{}</td></tr></table>'
+            self.send_html_response(response_str.format('var_name', var_name,
+                                                        'var_type', var_type,
+                                                        'var_val', var_val))
+            self.send_html_response('<i>In the future, we should be able to use the above information to better display the result in Jupyter.</i>')
         
     def do_execute(self, code, silent, store_history=True, user_expressions=None,
                    allow_stdin=False):
@@ -101,7 +101,7 @@ class ScalaTionKernel(Kernel):
                 lines = '\n'.join(lines)           # rejoin the lines
                 stream_content = {'name': 'stdout', 'text': '{}\n'.format(lines)}
                 self.send_response(self.iopub_socket, 'stream', stream_content)
-                # self.send_pretty_response(lines)
+                self.send_pretty_response(lines)
         
         return {'status': 'ok',
                 'execution_count': self.execution_count,
