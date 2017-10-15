@@ -6,6 +6,7 @@
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 from ipykernel.kernelbase import Kernel
+from .templates import *
 
 import os
 import pexpect
@@ -61,9 +62,12 @@ class ScalaTionKernel(Kernel):
         self.child = pexpect.spawnu('scala', SCALA_OPTIONS)
         self.child.expect(SCALA_PROMPT)
 
+    def render_template(self, template_name, template_dict):
+        """Render a template using the given dictionary."""
+        return template_name.render(**template_dict)
+        
     def send_html_response(self, html_content):
         """Send an HTML response."""
-        
         html = {
             'data': {
                 'text/html': '{}'.format(html_content)
@@ -71,7 +75,12 @@ class ScalaTionKernel(Kernel):
             'metadata': {}
         }
         self.send_response(self.iopub_socket, 'display_data', html)
-        
+
+    def send_template_response(self, template_name, template_dict):
+        """Send an HTML response using the given template and dictionary."""
+        rendered = self.render_template(template_name, template_dict)
+        self.send_html_response(rendered)
+
     def send_pretty_response(self, line):
         """Send a pretty response for supported REPL outputs."""
         # TODO finish
@@ -80,14 +89,19 @@ class ScalaTionKernel(Kernel):
         matches = re.findall(regex, line)
 
         if len(matches) == 1:
-            self.send_html_response('<strong>Pretty Print Information</strong>')
-            var_name, var_type, var_val = matches[0]
-            response_str = '<table><tr><td>{}</td><td>{}</td></tr><tr><td>{}</td><td>{}</td></tr><tr><td>{}</td><td>{}</td></tr></table>'
-            self.send_html_response(response_str.format('var_name', var_name,
-                                                        'var_type', var_type,
-                                                        'var_val', var_val))
-            self.send_html_response('<i>In the future, we should be able to use the above information to better display the result in Jupyter.</i>')
-        
+            var_name, var_type, var_value = matches[0]
+            info_dict = {'name': var_name,
+                         'type': var_type,
+                         'value': var_value}
+
+            if var_type.startswith('scalation.linalgebra.Vec'):
+                vector_regex = regex = r"(\d?\.\d+)(?:,?)"
+                vector_elems = re.findall(vector_regex, var_value)
+                vector_dict  = {'elems': vector_elems}
+                self.send_template_response(vector_template, vector_dict)
+            else:
+                self.send_template_response(info_template, info_dict)
+                
     def do_execute(self, code, silent, store_history=True, user_expressions=None,
                    allow_stdin=False):
 
@@ -95,13 +109,18 @@ class ScalaTionKernel(Kernel):
             for code_line in code.splitlines():
                 self.child.sendline(code_line)
                 self.child.expect(SCALA_PROMPT)
-                child_output = self.child.before   # entire output
-                lines = child_output.splitlines()  # breakup into lines
-                lines = lines[2:len(lines)-1]      # ignore first two and last lines
-                lines = '\n'.join(lines)           # rejoin the lines
+                child_output = self.child.before     # entire output
+                lines = child_output.splitlines()    # breakup into lines
+                lines = lines[2:len(lines)]        # ignore first two and last lines
+                lines = '\n'.join(lines)             # rejoin the lines
                 stream_content = {'name': 'stdout', 'text': '{}\n'.format(lines)}
-                self.send_response(self.iopub_socket, 'stream', stream_content)
-                self.send_pretty_response(lines)
+                if lines.startswith('res'):          # scala result
+                    self.send_pretty_response(lines) # pretty print result
+                elif not lines.startswith('import'): # echo back unless import
+                    regex   = r"^(.*)(?:\:\s)(.*)"
+                    matches = re.findall(regex, lines)
+                    if len(matches) == 0:
+                        self.send_response(self.iopub_socket, 'stream', stream_content)
         
         return {'status': 'ok',
                 'execution_count': self.execution_count,
