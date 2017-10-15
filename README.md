@@ -1,9 +1,10 @@
 # scalation_kernel
 
-This project provides a Scala+ScalaTion kernel for Jupyter. It uses the system
-or container's Scala installation for the underlying REPL. This implementation
-uses ```ipykernel``` and ```pexpect``` to allow the kernel to easily interact
-with the REPL. 
+This project provides a [Scala+ScalaTion](http://cobweb.cs.uga.edu/~jam/scalation.html)
+kernel for [Jupyter](http://jupyter.org). It uses the system's or container's
+Scala installation for the underlying REPL. This implementation uses
+```ipykernel``` and ```pexpect``` to allow the kernel to easily interact with
+the REPL. 
 
 ![Screenshot](https://i.imgur.com/BlgAPsq.png)
 
