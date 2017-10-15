@@ -95,9 +95,10 @@ class ScalaTionKernel(Kernel):
                          'value': var_value}
 
             if var_type.startswith('scalation.linalgebra.Vec'):
-                vector_regex = regex = r"(\d?\.\d+)(?:,?)"
+                vector_regex = regex = r"(\d+\.\d+)(?:,?)"
                 vector_elems = re.findall(vector_regex, var_value)
-                vector_dict  = {'elems': vector_elems}
+                vector_dict  = {'name': var_name,
+                                'elems': vector_elems}
                 self.send_template_response(vector_template, vector_dict)
             else:
                 self.send_template_response(info_template, info_dict)
