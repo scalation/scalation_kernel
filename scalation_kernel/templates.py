@@ -34,5 +34,45 @@ vector_template = Template("""
   </tr>
 </table>
 </div>
+
+<div id="chart_${name}_div"></div>
+<p>
+Charts: 
+<a id="chart_${name}_line" href="#">Line</a>, 
+<a id="chart_${name}_bar" href="#">Bar</a>
+</p>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'line', 'bar']});
+google.charts.setOnLoadCallback(function() {
+var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Index');
+      data.addColumn('number', 'Value');
+      data.addRows([
+% for elem in elems:
+        [${loop.index}, ${elem}],
+% endfor
+      ]);
+      var options = {
+        hAxis: {
+          title: 'Index'
+        },
+        vAxis: {
+          title: 'Value'
+        }
+      };
+      
+      document.getElementById('chart_${name}_line').onclick = function() {
+        var chart = new google.visualization.LineChart(document.getElementById('chart_${name}_div'));
+        chart.draw(data, options);
+      }
+
+      document.getElementById('chart_${name}_bar').onclick = function() {
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_${name}_div'));
+        chart.draw(data, options);
+      }
+
+});
+</script>
 """)
 
