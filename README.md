@@ -3,7 +3,7 @@
 This project provides a Scala+ScalaTion kernel for Jupyter. It uses the system
 or container's Scala installation.
 
-[Imgur](https://i.imgur.com/BlgAPsq.png)
+![Screenshot](https://i.imgur.com/BlgAPsq.png)
 
 ## Python Dependencies
 
