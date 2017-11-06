@@ -46,7 +46,7 @@ class ScalaTionKernel(Kernel):
         self.child.expect(SCALA_PROMPT)
         child_output = self.child.before
         lines = child_output.splitlines()
-        return lines[2]
+        return lines[1]
 
     @property
     def banner(self):
@@ -112,7 +112,7 @@ class ScalaTionKernel(Kernel):
                 self.child.expect(SCALA_PROMPT)
                 child_output = self.child.before     # entire output
                 lines = child_output.splitlines()    # breakup into lines
-                lines = lines[2:len(lines)]        # ignore first two and last lines
+                lines = lines[1:len(lines)]          # ignore first two and last lines
                 lines = '\n'.join(lines)             # rejoin the lines
                 stream_content = {'name': 'stdout', 'text': '{}\n'.format(lines)}
                 if lines.startswith('res'):          # scala result
