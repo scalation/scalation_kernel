@@ -115,13 +115,16 @@ class ScalaTionKernel(Kernel):
                 lines = lines[1:len(lines)]          # ignore first two and last lines
                 lines = '\n'.join(lines)             # rejoin the lines
                 stream_content = {'name': 'stdout', 'text': '{}\n'.format(lines)}
+ #               self.send_response(self.iopub_socket, 'stream', stream_content)
                 if lines.startswith('res'):          # scala result
                     self.send_pretty_response(lines) # pretty print result
                 elif not lines.startswith('import'): # echo back unless import
-                    regex   = r"^(.*)(?:\:\s)(.*)"
-                    matches = re.findall(regex, lines)
-                    if len(matches) == 0:
-                        self.send_response(self.iopub_socket, 'stream', stream_content)
+                    self.send_html_response('<pre style="font-size: small; display: flex; white-space: normal; word-break: break-word;"><code>{}</code></pre>'.format(lines))
+#                    self.send_response(self.iopub_socket, 'stream', stream_content)
+#                    regex   = r"^(.*)(?:\:\s)(.*)"
+#                    matches = re.findall(regex, lines)
+#                    if len(matches) == 0:
+#                        self.send_response(self.iopub_socket, 'stream', stream_content)
         
         return {'status': 'ok',
                 'execution_count': self.execution_count,
