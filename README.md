@@ -49,6 +49,21 @@ dependencies. Subsequent runs should launch Jupyter rather quickly.
 
 ## General Installation Instructions
 
+### Dependencies
+
+If you are not using the quick setup script, then make sure the following
+dependencies are satisfied before continuing (reccommended versions are
+given in parentheses):
+* Java >= 8 (1.8.0_152; 9.0.1)
+* Scala >= 2.12.4 (2.12.4)
+* Python >= 3.6.3 (3.6.3)
+  * `jupyter` >= 1.0.0
+  * `jupyter-client` >= 5.1.0
+  * `jupyter-console` >=5.2.0
+  * `jupyter-core` >= 4.4.0
+
+### Install ScalaTion Kernel
+
 If you already have a Jupyter installation and the required prerequisites,
 then run the following commands to install the developer version of 
 ScalaTion Kernel using PIP:
@@ -58,7 +73,7 @@ $ python3 -m pip install -e scalation_kernel
 $ python3 -m scalation_kernel.install
 ```
 
-## Run Jupyter
+### Run Jupyter with ScalaTion Kernel
 
 Before you run Jupyter, you need to make sure the following environment
 variables are set with the full paths to the ScalaTion JAR files:
