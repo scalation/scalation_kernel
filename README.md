@@ -8,16 +8,50 @@ the REPL.
 
 ![Screenshot](https://i.imgur.com/BlgAPsq.png)
 
-## Python Dependencies
+## Quick Setup
 
-Below are the Python packages that this project directly depends on:
+A quick setup script is provided that creates an independent Python 3 virtual 
+environment using [`virtualenv`](https://virtualenv.pypa.io/en/stable/) and 
+installs everything you need to get started with Jupyter, ScalaTion Kernel,
+and ScalaTion 1.3. To inspect this script before you run it, see
+[`quick_setup_1.3.sh`](quick_setup_1.3.sh). To download and run the script, you
+have two options, outlined below, depending on whether or not you have Git 
+installed. These instructions assume you are using one of Linux, MacOS, or 
+Windows 10 (with 
+[Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/about)).
 
-* ```pexpect``` (>=4.2.1)
-* ```ipykernel``` (>=4.6.1)
+### Quick Setup using Git
 
-## Installation
+Open your terminal and run the following commands to setup and run everything
+from a subdirectory called `scalation_kernel` (created for you):
+```
+$ git clone https://github.com/scalation/scalation_kernel.git
+$ cd scalation_kernel
+$ bash quick_setup_1.3.sh
+```
+The first time the script runs, it may take some time due to downloading
+dependencies. Subsequent runs should launch Jupyter rather quickly.
 
-To install the developer version of ```scalation_kernel``` using PIP:
+### Quick Setup without Git
+
+If you don't have Git installed, download the 
+[`zip`](https://github.com/scalation/scalation_kernel/archive/master.zip) or
+[`tar.gz`](https://github.com/scalation/scalation_kernel/archive/master.tar.gz)
+file and extract it. By default, the directory should be named 
+`scalation_kernel-master`. Open your terminal, change into the extracted
+directory, and run the following commands to setup and run everything
+from within this directory:
+```
+$ bash quick_setup_1.3.sh
+```
+The first time the script runs, it may take some time due to downloading
+dependencies. Subsequent runs should launch Jupyter rather quickly.
+
+## General Installation Instructions
+
+If you already have a Jupyter installation and the required prerequisites,
+then run the following commands to install the developer version of 
+ScalaTion Kernel using PIP:
 ```
 $ git clone https://github.com/scalation/scalation_kernel.git
 $ python3 -m pip install -e scalation_kernel
