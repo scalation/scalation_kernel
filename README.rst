@@ -1,7 +1,8 @@
-echo_kernel
+scalation_kernel
 ===========
 
-``scalation_kernel`` is a simple Scala+ScalaTion kernel for Jupyter. 
+``scalation_kernel`` is a simple Scala+ScalaTion kernel for Jupyter. For more
+information, see ``README.md``.
 
 Installation
 ------------
@@ -12,5 +13,6 @@ To install ``scalation_kernel`` from PyPI::
 
 Using the ScalaTion kernel
 ---------------------
-**Notebook**: The *New* menu in the notebook should show an option for a ScalaTion notebook.
+**Notebook**: The *New* menu in the notebook should show an option for a 
+ScalaTion notebook.
 
