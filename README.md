@@ -50,6 +50,11 @@ $ bash quick_setup_1.3.sh
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
 
+## Docker Container
+
+A [`Dockerfile`](docker/Dockerfile) is availble to those with [Docker](https://www.docker.com) installed.
+Instructions on how to build and run the Docker image using the provided `Dockerfile` can be found [here](docker).
+
 ## General Installation Instructions
 
 ### Dependencies
