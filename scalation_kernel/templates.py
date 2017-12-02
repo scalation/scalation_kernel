@@ -1,77 +1,41 @@
 
 from mako.template import Template
 
-info_template = Template("""
-<p><strong>Pretty Print Information</strong></p>
-<table>
-  <tr>
-    <td>Name</td><td>${name}</td>
-  </tr>
-  <tr>
-    <td>Type</td><td>${type}</td>
-  </tr>
-  <tr>
-    <td>Value</td><td>${value}</td>
-  </tr>
-</table>
-<p><i>In the future, we should be able to use the above information to better display the result in Jupyter.</i></p>
+toggle_debug_mode_template = Template("""
+<p>
+% if debug_mode:
+<strong>ScalaTion Kernel <code>debug_mode</code> enabled.</strong>
+The kernel will now, as needed, respond with additional messages containing debug information.
+% else:
+<strong>ScalaTion Kernel <code>debug_mode</code> disabled.</strong>
+% endif
+To undo this setting, use the <code>::debug_mode</code> command again.
+</p>
 """)
 
-vector_template = Template("""
-<div style='overflow:auto;'>
-<table>
-  <tr>
-    <td><strong>Index</strong></td>
-% for elem in elems:
-    <td>${loop.index}</td>
+debug_template = Template("""
+<style>
+#stack-${uuid} {
+    display: none;
+}
+
+#stack-${uuid} code {
+    white-space: pre;
+    overflow-x: auto;
+    display: inline-block;
+    min-width: 100%;
+}
+</style>
+<p><strong>ScalaTion Kernel Debug:</strong> ${timestamp} -- ${message} [<a id="toggle-${uuid}">toggle stack trace</a>]</p>
+<pre id="stack-${uuid}"><code>
+% for frameinfo in stack:
+${str(frameinfo)}
 % endfor
-  </tr>
-  <tr>
-    <td><strong>Value</strong></td>
-% for elem in elems:
-    <td>${elem}</td>
-% endfor
-  </tr>
+</code></pre>
 </table>
-</div>
-
-<div id="chart_${name}_div"></div>
-<p>
-Charts: 
-<a id="chart_${name}_line" href="#">Line</a>, 
-<a id="chart_${name}_bar" href="#">Bar</a>
-</p>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-google.charts.load('current', {packages: ['corechart', 'line', 'bar']});
-google.charts.setOnLoadCallback(function() {
-var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Index');
-      data.addColumn('number', 'Value');
-      data.addRows([
-% for elem in elems:
-        [${loop.index}, ${elem}],
-% endfor
-      ]);
-      var options = {
-        hAxis: {
-          title: 'Index'
-        },
-        vAxis: {
-          title: 'Value'
-        }
-      };
-      
-      document.getElementById('chart_${name}_line').onclick = function() {
-        var chart = new google.visualization.LineChart(document.getElementById('chart_${name}_div'));
-        chart.draw(data, options);
-      }
-
-      document.getElementById('chart_${name}_bar').onclick = function() {
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_${name}_div'));
-        chart.draw(data, options);
-      }
-
+<script>
+$("#toggle-${uuid}").click(function(){
+    $("#stack-${uuid}").toggle();
 });
 </script>
 """)
