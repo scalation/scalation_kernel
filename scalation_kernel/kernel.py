@@ -35,6 +35,9 @@ TEXT_PREFIX = '<scalation_kernel>:text:'
 IMAG_PREFIX = '<scalation_kernel>:imag:'  # images
 
 CMD_CHARTS  = ':charts'
+CMD_PLOTV   = ':plotv'
+CMD_PLOTM   = ':plotv'
+CMD_PLOTF   = ':plotv'
 
 class ScalaTionKernel(Kernel):
     """A Scala+ScalaTion kernel for Jupyter. It uses the system or container's 
@@ -78,10 +81,66 @@ class ScalaTionKernel(Kernel):
         return template_name.render(**template_dict)
 
     def send_chart_setup_response(self):
-        html_content = '\n'.join(['<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>',
-                                  '<script src="//cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>'])
-        self.send_html_response(html_content)
-    
+        from matplotlib import pyplot
+        from io import BytesIO
+        import base64
+
+        figfile = BytesIO()
+        pyplot.plot([1, 2, 3, 4])
+        pyplot.plot([1, 4, 9, 16])
+        pyplot.savefig(figfile, format='png')
+        figfile.seek(0)        
+        figdata_png = base64.b64encode(figfile.getvalue()).decode('utf-8')
+        self.send_image_response("data:image/png;base64,{}".format(figdata_png))
+        
+#        html_content = '\n'.join(['<script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>',
+#                                  '<script src="//cdn.plot.ly/plotly-latest.min.js" charset="utf-8"></script>'])
+#        self.send_html_response(html_content)
+
+    def send_plotv_response(self, plot_args):
+
+        from matplotlib import pyplot
+        from io import BytesIO
+        import argparse, ast, base64, shlex
+        
+        parser = argparse.ArgumentParser(add_help=False)
+        parser.add_argument('vectors', metavar='V', nargs='+')
+        parser.add_argument('--title')
+        parser.add_argument('--xlabel')
+        parser.add_argument('--ylabel')
+        parser.add_argument('--style')
+#        args    = parser.parse_args(plot_args.split())
+        args    = parser.parse_args(shlex.split(plot_args))
+        figfile = BytesIO()
+
+        if args.title != None:
+            pyplot.title(args.title)
+
+        if args.xlabel != None:
+            pyplot.xlabel(args.xlabel)
+
+        if args.ylabel != None:
+            pyplot.ylabel(args.ylabel)
+
+        for v in args.vectors:
+            code_line = 'println({}().mkString("[", ",", "]"))'.format(v)
+            self.child.sendline(code_line)            # send the line
+            nrows  = ceil(len(code_line) / 80)        # how many times is the input split by pexpect?
+            prompt = self.child.expect(SCALA_PROMPT)  # check for prompt
+            output = self.child.before                # get entire output
+            lines  = output.splitlines()              # breakup into lines
+            lines  = lines[nrows:-1]                  # ignore input lines and last line
+            if len(lines) > 0:                        # more than one line in output?
+                lines = '\n'.join(lines) + '\n'       # rejoin lines
+                vec   = ast.literal_eval(lines)
+                pyplot.plot(vec)
+
+        pyplot.savefig(figfile, format='png')
+        pyplot.clf()
+        figfile.seek(0)        
+        figdata_png = base64.b64encode(figfile.getvalue()).decode('utf-8')
+        self.send_image_response("data:image/png;base64,{}".format(figdata_png))
+
     def send_html_response(self, html_content):
         """Send an HTML response."""
         html = {
@@ -96,7 +155,7 @@ class ScalaTionKernel(Kernel):
         """Send a JSON response."""
         html = {
             'data': {
-                'application/json': '{}'.format(json_content)
+                'text/json': '{}'.format(json_content)
             },
             'metadata': {}
         }
@@ -149,6 +208,10 @@ class ScalaTionKernel(Kernel):
                     self.send_debug_response("trying to enable charts!")
                     self.send_chart_setup_response()
 
+                elif code_line.startswith(CMD_PLOTV):
+                    self.send_debug_response("trying to send a plotv!")
+                    self.send_plotv_response(code_line[len(CMD_PLOTV):])
+
                 else:
                 
                     self.child.sendline(code_line)                # send the line
@@ -200,3 +263,5 @@ class ScalaTionKernel(Kernel):
                 'payload': [],
                 'user_expressions': {},
                }
+
+    
