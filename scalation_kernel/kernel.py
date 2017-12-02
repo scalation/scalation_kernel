@@ -119,8 +119,10 @@ class ScalaTionKernel(Kernel):
         """
 
         self.send_debug_response("building a plotv (vector plot)")
-        
+
         from matplotlib import pyplot
+        pyplot.switch_backend('agg')
+        
         from io import BytesIO
         import argparse, ast, base64, shlex
         
