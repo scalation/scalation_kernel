@@ -10,6 +10,9 @@ the REPL.
 
 ## Quick Setup
 
+**Use Case:** The user wants to rapidly deploy a local Jupyter instance with 
+ScalaTion notebook support.
+
 A quick setup script is provided that creates an independent Python 3 virtual 
 environment using [`virtualenv`](https://virtualenv.pypa.io/en/stable/) and 
 installs everything you need to get started with Jupyter, ScalaTion Kernel,
@@ -47,6 +50,11 @@ $ bash quick_setup_1.3.sh
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
 
+## Docker Container
+
+A [`Dockerfile`](docker/Dockerfile) is availble to those with [Docker](https://www.docker.com) installed.
+Instructions on how to build and run the Docker image using the provided `Dockerfile` can be found [here](docker).
+
 ## General Installation Instructions
 
 ### Dependencies
@@ -62,11 +70,25 @@ given in parentheses):
   * `jupyter-console` >=5.2.0
   * `jupyter-core` >= 4.4.0
 
-### Install ScalaTion Kernel
+### Install ScalaTion Kernel from PyPI using PIP
 
+A relatively stable version of ScalaTion Kernel is hosted [here](https://pypi.python.org/pypi?:action=display&name=scalation-kernel) on PyPI.
+If you already have a Jupyter installation and the required prerequisites,
+then run the following commands to install the PyPI version of 
+ScalaTion Kernel using PIP: 
+
+```
+$ python3 -m pip install scalation_kernel
+$ python3 -m scalation_kernel.install
+```
+
+### Install ScalaTion Kernel from GitHub using PIP
+
+The development version of ScalaTion Kernel is hosted [here](https://github.com/scalation/scalation_kernel/) on GitHub. 
 If you already have a Jupyter installation and the required prerequisites,
 then run the following commands to install the developer version of 
 ScalaTion Kernel using PIP:
+
 ```
 $ git clone https://github.com/scalation/scalation_kernel.git
 $ python3 -m pip install -e scalation_kernel
