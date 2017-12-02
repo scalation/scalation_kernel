@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='scalation_kernel',
-    version='1.0',
+    version='1.1',
     packages=['scalation_kernel'],
     description='ScalaTion kernel for Jupyter',
     long_description=readme,
@@ -21,5 +21,6 @@ setup(
         'ipykernel',
         'pexpect',
         'mako',
+        'matplotlib',
     ],
 )
