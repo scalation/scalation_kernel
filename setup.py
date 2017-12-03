@@ -5,7 +5,7 @@ with open('README.rst') as f:
 
 setup(
     name='scalation_kernel',
-    version='1.1.1',
+    version='1.1.2',
     packages=['scalation_kernel'],
     description='ScalaTion kernel for Jupyter',
     long_description=readme,
