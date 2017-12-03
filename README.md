@@ -1,116 +1,46 @@
-# scalation_kernel
+# Scalation Kernel
 
-This project provides a [Scala+ScalaTion](http://cobweb.cs.uga.edu/~jam/scalation.html)
-kernel for [Jupyter](http://jupyter.org). It uses the system's or container's
-Scala installation for the underlying REPL. This implementation uses
-```ipykernel``` and ```pexpect``` to allow the kernel to easily interact with
-the REPL. 
+## Overview
 
-![Screenshot](https://i.imgur.com/BlgAPsq.png)
+The **Scalation Kernel** project provides a lightweight
+[Scala](http://www.scala-lang.org)
+[ScalaTion](http://cobweb.cs.uga.edu/~jam/scalation.html) kernel for
+Jupyter notebooks. 
+More information is available on the
+[project page](https://github.com/scalation/scalation_kernel).
 
-## Quick Setup
+## Installation
 
-**Use Case:** The user wants to rapidly deploy a local Jupyter instance with 
-ScalaTion notebook support.
-
-A quick setup script is provided that creates an independent Python 3 virtual 
-environment using [`virtualenv`](https://virtualenv.pypa.io/en/stable/) and 
-installs everything you need to get started with Jupyter, ScalaTion Kernel,
-and ScalaTion 1.3. To inspect this script before you run it, see
-[`quick_setup_1.3.sh`](quick_setup_1.3.sh). To download and run the script, you
-have two options, outlined below, depending on whether or not you have Git 
-installed. These instructions assume you are using one of Linux, MacOS, or 
-Windows 10 (with 
-[Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/about)).
-
-### Quick Setup using Git
-
-Open your terminal and run the following commands to setup and run everything
-from a subdirectory called `scalation_kernel` (created for you):
-```
-$ git clone https://github.com/scalation/scalation_kernel.git
-$ cd scalation_kernel
-$ bash quick_setup_1.3.sh
-```
-The first time the script runs, it may take some time due to downloading
-dependencies. Subsequent runs should launch Jupyter rather quickly.
-
-### Quick Setup without Git
-
-If you don't have Git installed, download the 
-[`zip`](https://github.com/scalation/scalation_kernel/archive/master.zip) or
-[`tar.gz`](https://github.com/scalation/scalation_kernel/archive/master.tar.gz)
-file and extract it. By default, the directory should be named 
-`scalation_kernel-master`. Open your terminal, change into the extracted
-directory, and run the following commands to setup and run everything
-from within this directory:
-```
-$ bash quick_setup_1.3.sh
-```
-The first time the script runs, it may take some time due to downloading
-dependencies. Subsequent runs should launch Jupyter rather quickly.
-
-## Docker Container
-
-A [`Dockerfile`](docker/Dockerfile) is availble to those with [Docker](https://www.docker.com) installed.
-Instructions on how to build and run the Docker image using the provided `Dockerfile` can be found [here](docker).
-
-## General Installation Instructions
-
-### Dependencies
-
-If you are not using the quick setup script, then make sure the following
-dependencies are satisfied before continuing (reccommended versions are
-given in parentheses):
-* Java >= 8 (1.8.0_152; 9.0.1)
-* Scala >= 2.12.4 (2.12.4)
-* Python >= 3.6.3 (3.6.3)
-  * `jupyter` >= 1.0.0
-  * `jupyter-client` >= 5.1.0
-  * `jupyter-console` >=5.2.0
-  * `jupyter-core` >= 4.4.0
-
-### Install ScalaTion Kernel from PyPI using PIP
-
-A relatively stable version of ScalaTion Kernel is hosted [here](https://pypi.python.org/pypi?:action=display&name=scalation-kernel) on PyPI.
-If you already have a Jupyter installation and the required prerequisites,
-then run the following commands to install the PyPI version of 
-ScalaTion Kernel using PIP: 
+Installation requires a recent ScalaTion distribution (>= 1.3) from
+[here](http://cobweb.cs.uga.edu/~jam/scalation.html). To install
+**Scalation Kernel** from PyPI, you can use the commands:
 
 ```
-$ python3 -m pip install scalation_kernel
+$ python3 -m pip install -U scalation_kernel
+$ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat.jar
+$ export SCALATION_MODELING_JAR=/path/to/scalation_modeling.jar
 $ python3 -m scalation_kernel.install
 ```
 
-### Install ScalaTion Kernel from GitHub using PIP
+More installation options are presented in the
+[Installation Guide](https://github.com/scalation/scalation_kernel/blob/master/INSTALL.md),
+including deployment options for Python virtual environments and
+Docker containers. 
 
-The development version of ScalaTion Kernel is hosted [here](https://github.com/scalation/scalation_kernel/) on GitHub. 
-If you already have a Jupyter installation and the required prerequisites,
-then run the following commands to install the developer version of 
-ScalaTion Kernel using PIP:
+## Using ScalaTion Kernel
 
-```
-$ git clone https://github.com/scalation/scalation_kernel.git
-$ python3 -m pip install -e scalation_kernel
-$ python3 -m scalation_kernel.install
-```
+The *New* menu in Jupyter should show an option to create a ScalaTion
+notebook using the installed kernel. 
 
-### Run Jupyter with ScalaTion Kernel
+A [User Guide](https://github.com/scalation/scalation_kernel/blob/master/USER.md)
+is planned for the next minor release. Until then, see
+[example notebooks](https://github.com/scalation/scalation_kernel/tree/master/notebooks) for usage examples.
 
-Before you run Jupyter, you need to make sure the following environment
-variables are set with the full paths to the ScalaTion JAR files:
-```
-$ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat_2.12-1.3.jar
-$ export SCALATION_MODELING_JAR=/path/to/scalation_modeling_2.12-1.3.jar
-```
+## License
 
-To run Jupyter, you might use the following command:
-```
-$ python3 -m jupyter notebook
-```
-
-## Using the ScalaTion kernel
-
-**Notebook**: The *New* menu in the notebook should show an option for a
-"ScalaTion" notebook.
+This software is free and open source under an
+[MIT License](https://github.com/scalation/scalation_kernel/blob/master/LICENSE).
+The content and opinions expressed on this Web page do not necessarily
+reflect the views of nor are they endorsed by the University of Georgia or
+the University System of Georgia.
 
