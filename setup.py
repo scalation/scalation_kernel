@@ -31,5 +31,5 @@ setup(
         'mako',
         'matplotlib',
     ],
-    keywords='jupyter kernel scala scalaTion',
+    keywords='jupyter kernel scala scalation',
 )

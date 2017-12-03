@@ -16,7 +16,7 @@ Installation
 ------------
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 `here <http://cobweb.cs.uga.edu/~jam/scalation.html>`_. To install
-**``scalation_kernel``** from PyPI, you can use the commands::
+**Scalation Kernel** from PyPI, you can use the commands::
 
     $ python3 -m pip install -U scalation_kernel
     $ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat.jar
