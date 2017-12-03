@@ -104,9 +104,15 @@ class ScalaTionKernel(Kernel):
         self.send_template_response(toggle_debug_mode_template, toggle_debug_mode_dict)
 
     def do_quick(self, code_line, evaluate = False):
-        self.child.sendline(code_line)            # send the line
+        self.send_debug_response("<code>do_quick</code> with <code>{}</code>".format(code_line))
+        if isinstance(code_line, list):
+            for line in code_line:
+                self.child.sendline(line)         # send each line
+                self.child.expect(SCALA_PROMPT)   # check for prompt
+        else:
+            self.child.sendline(code_line)    # send the line
+            self.child.expect(SCALA_PROMPT)   # check for prompt
         nrows  = ceil(len(code_line) / 80)        # how many times is the input split by pexpect?
-        prompt = self.child.expect(SCALA_PROMPT)  # check for prompt
         output = self.child.before                # get entire output
         lines  = output.splitlines()              # breakup into lines
         lines  = lines[nrows:-1]                  # ignore input lines and last line
@@ -125,7 +131,9 @@ class ScalaTionKernel(Kernel):
 
         prettyr_dict = { 'name':     self.do_quick('println({}.name)'.format(relation)),
                          'colNames': self.do_quick('println({}.colName.mkString("[\'", "\',\'", "\']"))'.format(relation), True),
-                         'data':     self.do_quick('println((0 until {0}.rows).map({0}.row(_).mkString("[\'", "\',\'", "\']")).mkString("[", ",", "]"))'.format(relation), True) }
+                         'data':     self.do_quick(['println((0 until {0}.rows).map({0}.row(_)'.format(relation), 
+                                                    '.mkString("[\'", "\',\'", "\']"))',
+                                                    '.mkString("[", ",", "]"))'.format(relation)], True) }
 
         
         self.send_template_response(prettyr_template, prettyr_dict)
