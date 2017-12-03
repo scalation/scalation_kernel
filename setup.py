@@ -21,10 +21,8 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Education',        
         'Framework :: Jupyter',
-        'Framework :: ScalaTion',        
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Scala'
         'Natural Language :: English',
     ],
     install_requires=[
