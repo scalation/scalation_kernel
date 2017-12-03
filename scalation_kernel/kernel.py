@@ -112,6 +112,7 @@ class ScalaTionKernel(Kernel):
         lines  = lines[nrows:-1]                  # ignore input lines and last line
         lines = '\n'.join(lines)                  # rejoin lines
         if evaluate:
+            self.send_debug_response("attempting to call <code>ast.literal_eval</code> with <code>{}</code>".format(lines))
             import ast
             return ast.literal_eval(lines)
         else:
