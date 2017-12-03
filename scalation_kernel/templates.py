@@ -32,11 +32,28 @@ debug_template = Template("""
 ${str(frameinfo)}
 % endfor
 </code></pre>
-</table>
 <script>
 $("#toggle-${uuid}").click(function(){
     $("#stack-${uuid}").toggle();
 });
 </script>
+""")
+
+prettyr_template = Template("""
+<p><strong>Relation: ${name}</strong></p>
+<table>
+<tr>
+% for colName in colNames:
+    <th><code>${colName}</code></th>
+% endfor
+</tr>
+% for row in data:
+<tr>
+    % for item in row:
+    <td><code>${item}</code></td>
+    % endfor
+</tr>
+% endfor 
+</table>
 """)
 

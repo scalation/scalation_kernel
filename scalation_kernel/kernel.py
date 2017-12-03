@@ -38,6 +38,7 @@ CMD_PLOTV   = '::plotv'
 CMD_PLOTM   = '::plotm'
 CMD_PLOTF   = '::plotf'
 CMD_DEBUG   = '::debug'
+CMD_PRETTYR = '::relation'
 
 class ScalaTionKernel(Kernel):
     """A Scala+ScalaTion kernel for Jupyter. It uses the system or container's 
@@ -102,6 +103,32 @@ class ScalaTionKernel(Kernel):
         toggle_debug_mode_dict = {'debug_mode': self.debug_mode }
         self.send_template_response(toggle_debug_mode_template, toggle_debug_mode_dict)
 
+    def do_quick(self, code_line, evaluate = False):
+        self.child.sendline(code_line)            # send the line
+        nrows  = ceil(len(code_line) / 80)        # how many times is the input split by pexpect?
+        prompt = self.child.expect(SCALA_PROMPT)  # check for prompt
+        output = self.child.before                # get entire output
+        lines  = output.splitlines()              # breakup into lines
+        lines  = lines[nrows:-1]                  # ignore input lines and last line
+        lines = '\n'.join(lines)                  # rejoin lines
+        if evaluate:
+            import ast
+            return ast.literal_eval(lines)
+        else:
+            return lines
+        
+    def send_prettyr_response(self, relation):
+        """Send a response with a prettier version of a ``Relation``."""
+
+        self.send_debug_response("building a prettier relation for <code>{}</code>".format(relation))
+
+        prettyr_dict = { 'name':     self.do_quick('println({}.name)'.format(relation)),
+                         'colNames': self.do_quick('println({}.colName.mkString("[\'", "\',\'", "\']"))'.format(relation), True),
+                         'data':     self.do_quick('println((0 until {0}.rows).map({0}.row(_).mkString("[\'", "\',\'", "\']")).mkString("[", ",", "]"))'.format(relation), True) }
+
+        
+        self.send_template_response(prettyr_template, prettyr_dict)
+        
     def send_plotv_response(self, plot_args):
         """Generate a plot with ``matplotlib`` using-specified ScalaTion vectors
            and options, converts it to PNG format, and sends it back to the
@@ -214,6 +241,9 @@ class ScalaTionKernel(Kernel):
                 if code_line.startswith(CMD_DEBUG):
                     self.toggle_debug_mode()
 
+                elif code_line.startswith(CMD_PRETTYR):
+                    self.send_prettyr_response(code_line[len(CMD_PRETTYR):].strip())
+                    
                 elif code_line.startswith(CMD_PLOTV):
                     self.send_plotv_response(code_line[len(CMD_PLOTV):])
 
