@@ -1,7 +1,7 @@
 
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # @author  Michael Cotterell
-# @version 1.1.0
+# @version 1.1.x
 # @see     LICENSE (MIT style license file).
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -13,7 +13,7 @@ import os
 import pexpect
 import re
 
-SCALATION_KERNEL_VERSION = '1.0.1'
+SCALATION_KERNEL_VERSION = '1.1.x'
 SCALATION_KERNEL_AUTHORS = 'Michael E. Cotterell, John A. Miller'
 SCALATION_KERNEL_LICENSE = 'MIT'
 
@@ -137,6 +137,15 @@ class ScalaTionKernel(Kernel):
 
         
         self.send_template_response(prettyr_template, prettyr_dict)
+
+    def do_ast_eval(self, expression):
+        import ast
+        try:
+            return ast.literal_eval(lines)
+        except Exception as e:
+            debug_message = "problem calling <code>ast.literal_eval</code> with <code>{}</code>. {}".format(expression, str(e))
+            self.send_debug_response(debug_message)
+            return None
         
     def send_plotv_response(self, plot_args):
         """Generate a plot with ``matplotlib`` using-specified ScalaTion vectors
@@ -167,6 +176,7 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('--title')
         parser.add_argument('--xlabel')
         parser.add_argument('--ylabel')
+        parser.add_argument('--axis')
 
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
@@ -180,6 +190,10 @@ class ScalaTionKernel(Kernel):
         if args.ylabel != None:
             pyplot.ylabel(args.ylabel)
 
+        if args.axis != None:
+            
+            pyplot.axis(args.axis)
+            
         for v in args.vectors:
             code_line = 'println({}().mkString("[", ",", "]"))'.format(v)
             self.child.sendline(code_line)            # send the line
