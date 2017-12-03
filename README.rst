@@ -4,10 +4,6 @@ ScalaTion Kernel
 | Copyright (c) 2017 Michael E. Cotterell and the University of Georgia
 | https://github.com/scalation/scalation_kernel
 
-.. image:: https://i.imgur.com/BlgAPsq.png
-   :width: 75%
-   :alt: Screenshot of ScalaTion Kernel in Jupyter
-
 Overview
 --------
 The **Scalation Kernel** project provides a lightweight
