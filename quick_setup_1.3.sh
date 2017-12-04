@@ -17,8 +17,7 @@ if [ ! -d "scalation_1.3" ]; then
 fi
 
 # setup environment variables
-export SCALATION_MATHSTAT_JAR="$(pwd)/scalation_1.3/scalation_models/lib/scalation_mathstat_2.12-1.3.jar"
-export SCALATION_MODELING_JAR="$(pwd)/scalation_1.3/scalation_models/lib/scalation_modeling_2.12-1.3.jar"
+export SCALATION_JARS=$(find scalation*/scalation_models/lib | grep .jar | paste -sd ":" -)
 
 # install python packages if needed
 python3 -m pip install --upgrade pip

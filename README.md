@@ -12,13 +12,27 @@ More information is available on the
 ## Installation
 
 Installation requires a recent ScalaTion distribution (>= 1.3) from
-[here](http://cobweb.cs.uga.edu/~jam/scalation.html). To install
-**Scalation Kernel** from PyPI, you can use the commands:
+[here](http://cobweb.cs.uga.edu/~jam/scalation.html). Once you have
+ScalaTion, make sure the ``SCALATION_JARS`` environment variable is
+set appropriately before continuing. This can be done individually,
+as seen here:
+
+```
+$ export SCALATION_JARS=/path/to/scalation_mathstat.jar
+$ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
+```
+
+It can also be done with a single command if you know the path to the
+``scalation_models`` directory:
+
+```
+$ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
+```
+
+To install **Scalation Kernel** from PyPI, you can use the commands:
 
 ```
 $ python3 -m pip install -U scalation_kernel
-$ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat.jar
-$ export SCALATION_MODELING_JAR=/path/to/scalation_modeling.jar
 $ python3 -m scalation_kernel.install
 ```
 

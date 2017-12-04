@@ -18,8 +18,10 @@ SCALATION_KERNEL_AUTHORS = 'Michael E. Cotterell, John A. Miller'
 SCALATION_KERNEL_LICENSE = 'MIT'
 
 SCALATION_VERSION = '1.3'
-SCALATION_JARS    = ':'.join([os.environ['SCALATION_MATHSTAT_JAR'],
-                              os.environ['SCALATION_MODELING_JAR']])
+#SCALATION_JARS    = ':'.join([os.environ['SCALATION_MATHSTAT_JAR'],
+#                              os.environ['SCALATION_MODELING_JAR']])
+
+SCALATION_JARS    = os.environ['SCALATION_JARS']
 
 SCALA_EXEC        = 'scala'                  # scala executable
 SCALA_PROMPT_MAIN = 'scala> '                # main prompt
