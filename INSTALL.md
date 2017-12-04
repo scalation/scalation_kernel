@@ -34,7 +34,8 @@ It can also be done with a single command if you know the path to the
 $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
 ```
 
-To install **Scalation Kernel** from PyPI, you can use the commands:
+To install **Scalation Kernel** from PyPI, you can use the following
+commands:
 
 ```
 $ python3 -m pip install -U scalation_kernel

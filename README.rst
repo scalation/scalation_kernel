@@ -5,9 +5,10 @@ Overview
 --------
 
 The **Scalation Kernel** project provides a lightweight
-`Scala <http://www.scala-lang.org>`__
+`Scala <http://www.scala-lang.org>`__ +
 `ScalaTion <http://cobweb.cs.uga.edu/~jam/scalation.html>`__ kernel for
-Jupyter notebooks. More information is available on the `project
+`Jupyter <https://jupyter.readthedocs.io/en/latest/>`__ notebooks. More
+information is available on the `project
 page <https://github.com/scalation/scalation_kernel>`__.
 
 Installation
@@ -31,7 +32,8 @@ It can also be done with a single command if you know the path to the
 
     $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
 
-To install **Scalation Kernel** from PyPI, you can use the commands:
+To install **Scalation Kernel** from PyPI, you can use the following
+commands:
 
 ::
 
