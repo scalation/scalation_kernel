@@ -92,9 +92,9 @@ function check_deps_quick {
     echo $(which scala)
     echo $(scala -version)
 
-    echo "Checking for SBT ..."
-    ! [[ -x `command -v sbt` ]] && echo "Not found! Cannot continue." && exit 1
-    echo $(which sbt)
+#    echo "Checking for SBT ..."
+#    ! [[ -x `command -v sbt` ]] && echo "Not found! Cannot continue." && exit 1
+#    echo $(which sbt)
 
     read -p "Are you sure you want to continue? [y/n] " -n 1 -r
     echo    # (optional) move to a new line

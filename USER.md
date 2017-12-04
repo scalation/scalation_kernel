@@ -7,6 +7,8 @@
 - [Creating a ScalaTion Notebook](#creating-a-scalation-notebook)
 - [Using the ScalaTion Big Data Framework](#using-the-scalation-big-data-framework)
 - [Basic Plotting](#basic-plotting)
+  * [`::plotv`](#plotv)
+  * [`::plotm`](#plotm)
 - [Formatters](#formatters)
 
 <!-- tocstop -->
