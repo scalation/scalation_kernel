@@ -95,11 +95,6 @@ dependencies. Subsequent runs should launch Jupyter rather quickly.
 A [`Dockerfile`](docker/Dockerfile) is availble to those with [Docker](https://www.docker.com) installed.
 Instructions on how to build and run the Docker image using the provided `Dockerfile` can be found [here](docker).
 
-<hr>
-The content and opinions expressed on this Web page do not necessarily reflect
-the views of nor are they endorsed by the University of Georgia or the
-University System of Georgia.
-
 ## Development Version
 
 ### Install ScalaTion Kernel from GitHub using PIP
@@ -125,4 +120,13 @@ with Jupyter. To run Jupyter, you might use the following command:
 ```
 $ python3 -m jupyter notebook
 ```
+
+<hr>
+
+Copyright (c) 2017 Michael E. Cotterell and the University of Georgia.
+This software is free and open source under an
+[MIT License](https://github.com/scalation/scalation_kernel/blob/master/LICENSE.md).
+The content and opinions expressed on this Web page do not necessarily
+reflect the views of nor are they endorsed by the University of Georgia or
+the University System of Georgia.
 
