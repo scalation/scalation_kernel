@@ -38,8 +38,7 @@ RUN set -ex && \
     tar zxf scalation.tar.gz -C /opt/scalation --strip-components=1 && \
     rm scalation.tar.gz
 
-ENV SCALATION_MATHSTAT_JAR="/opt/scalation/scalation_models/lib/scalation_mathstat_2.12-1.3.jar"
-ENV SCALATION_MODELING_JAR="/opt/scalation/scalation_models/lib/scalation_modeling_2.12-1.3.jar"
+ENV SCALATION_JARS="/opt/scalation/scalation_models/lib/scalation_mathstat_2.12-1.3.jar:/opt/scalation/scalation_models/lib/scalation_modeling_2.12-1.3.jar"
 
 # download and install scalation_kernel
 RUN git clone https://github.com/scalation/scalation_kernel.git && \
