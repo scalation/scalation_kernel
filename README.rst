@@ -51,7 +51,8 @@ notebook using the installed kernel.
 
 A `User
 Guide <https://github.com/scalation/scalation_kernel/blob/master/USER.md>`__
-is planned for the next minor release. Until then, see `example
+is currently under development. A complete draft is planned for the next
+minor release. Until then, please see the collection of `example
 notebooks <https://github.com/scalation/scalation_kernel/tree/master/notebooks>`__
 for usage examples.
 
@@ -59,7 +60,7 @@ License
 -------
 
 This software is free and open source under an `MIT
-License <https://github.com/scalation/scalation_kernel/blob/master/LICENSE>`__.
+License <https://github.com/scalation/scalation_kernel/blob/master/LICENSE.md>`__.
 The content and opinions expressed on this Web page do not necessarily
 reflect the views of nor are they endorsed by the University of Georgia
 or the University System of Georgia.

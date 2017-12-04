@@ -5,7 +5,7 @@
 <!-- toc -->
 
 - [General Instructions](#general-instructions)
-- [Quick Setup Script](#quick-setup-script)
+- [Quick Setup Scripts](#quick-setup-scripts)
   * [Quick Setup using Git](#quick-setup-using-git)
   * [Quick Setup without Git](#quick-setup-without-git)
 - [Docker Container](#docker-container)
