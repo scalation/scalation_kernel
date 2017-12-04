@@ -145,6 +145,56 @@ class ScalaTionKernel(Kernel):
             debug_message = "problem calling <code>ast.literal_eval</code> with <code>{}</code>. {}".format(expression, str(e))
             self.send_debug_response(debug_message)
             return None
+
+    def send_plotm_response(self, plot_args):
+        """Generate a plot with ``matplotlib`` using-specified ScalaTion matrices
+           and options, converts it to PNG format, and sends it back to the
+           notebook as a templated response.
+        """
+
+        self.send_debug_response("building a plotm (matrix plot)")
+
+        from matplotlib import pyplot
+        pyplot.switch_backend('agg')
+        
+        from io import BytesIO
+        import argparse, ast, base64, shlex
+        
+        parser = argparse.ArgumentParser(add_help=False)
+        parser.add_argument('matrices', metavar='M', nargs='+')
+        parser.add_argument('--title')
+        parser.add_argument('--xlabel')
+        parser.add_argument('--ylabel')
+        parser.add_argument('--axis')
+
+        args    = parser.parse_args(shlex.split(plot_args))
+        figfile = BytesIO()
+
+        if args.title != None:
+            pyplot.title(args.title)
+
+        if args.xlabel != None:
+            pyplot.xlabel(args.xlabel)
+
+        if args.ylabel != None:
+            pyplot.ylabel(args.ylabel)
+
+        if args.axis != None:            
+            pyplot.axis(args.axis)
+            
+        for mat in args.matrices:
+            self.send_debug_response("building a plotm for <code>{}</code>".format(mat))
+            dim2 = self.do_quick('println({}.dim2)'.format(mat), True)
+            for col in range(0, dim2):
+                self.send_debug_response("building column <code>{}</code> for <code>{}</code>".format(col, mat))
+                col_data = self.do_quick('println({}.col({})().mkString("[", ",", "]"))'.format(mat, col), True)
+                pyplot.plot(col_data)
+
+        pyplot.savefig(figfile, format='png')
+        pyplot.clf()
+        figfile.seek(0)        
+        figdata_png = base64.b64encode(figfile.getvalue()).decode('utf-8')
+        self.send_image_response("data:image/png;base64,{}".format(figdata_png))
         
     def send_plotv_response(self, plot_args):
         """Generate a plot with ``matplotlib`` using-specified ScalaTion vectors
@@ -171,10 +221,10 @@ class ScalaTionKernel(Kernel):
         import argparse, ast, base64, shlex
         
         parser = argparse.ArgumentParser(add_help=False)
-        parser.add_argument('vectors', metavar='V', nargs='+')
-        parser.add_argument('--title')
-        parser.add_argument('--xlabel')
-        parser.add_argument('--ylabel')
+        parser.add_argument('vectors', metavar='VectorD', nargs='+', help='a ScalaTion vector')
+        parser.add_argument('--title', help='plot title')
+        parser.add_argument('--xlabel', help='x-axis label')
+        parser.add_argument('--ylabel', help='y-axis label')
         parser.add_argument('--axis')
 
         args    = parser.parse_args(shlex.split(plot_args))
@@ -194,17 +244,8 @@ class ScalaTionKernel(Kernel):
             pyplot.axis(args.axis)
             
         for v in args.vectors:
-            code_line = 'println({}().mkString("[", ",", "]"))'.format(v)
-            self.child.sendline(code_line)            # send the line
-            nrows  = ceil(len(code_line) / 80)        # how many times is the input split by pexpect?
-            prompt = self.child.expect(SCALA_PROMPT)  # check for prompt
-            output = self.child.before                # get entire output
-            lines  = output.splitlines()              # breakup into lines
-            lines  = lines[nrows:-1]                  # ignore input lines and last line
-            if len(lines) > 0:                        # more than one line in output?
-                lines = '\n'.join(lines) + '\n'       # rejoin lines
-                vec   = ast.literal_eval(lines)
-                pyplot.plot(vec)
+            vec = self.do_quick('println({}().mkString("[", ",", "]"))'.format(v), True)
+            pyplot.plot(vec)
 
         pyplot.savefig(figfile, format='png')
         pyplot.clf()
@@ -268,6 +309,9 @@ class ScalaTionKernel(Kernel):
                     
                 elif code_line.startswith(CMD_PLOTV):
                     self.send_plotv_response(code_line[len(CMD_PLOTV):])
+
+                elif code_line.startswith(CMD_PLOTM):
+                    self.send_plotm_response(code_line[len(CMD_PLOTM):])
 
                 else:
                 
