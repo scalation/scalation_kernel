@@ -26,6 +26,7 @@ setup(
         'Natural Language :: English',
     ],
     install_requires=[
+        'jupyter',
         'ipykernel',
         'pexpect',
         'mako',
