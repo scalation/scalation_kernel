@@ -1,9 +1,5 @@
 # Scalation Kernel
 
-| Copyright (c) 2017 Michael E. Cotterell and the University of Georgia
-| https://github.com/scalation/scalation_kernel/
-| https://pypi.python.org/pypi/scalation-kernel/
-
 ## Overview
 
 The **Scalation Kernel** project provides a lightweight
@@ -58,6 +54,7 @@ for usage examples.
 
 ## License
 
+Copyright (c) 2017 Michael E. Cotterell and the University of Georgia.
 This software is free and open source under an
 [MIT License](https://github.com/scalation/scalation_kernel/blob/master/LICENSE.md).
 The content and opinions expressed on this Web page do not necessarily

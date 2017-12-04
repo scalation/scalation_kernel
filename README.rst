@@ -59,6 +59,7 @@ for usage examples.
 License
 -------
 
+Copyright (c) 2017 Michael E. Cotterell and the University of Georgia.
 This software is free and open source under an `MIT
 License <https://github.com/scalation/scalation_kernel/blob/master/LICENSE.md>`__.
 The content and opinions expressed on this Web page do not necessarily
