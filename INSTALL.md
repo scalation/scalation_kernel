@@ -48,7 +48,7 @@ with Jupyter. To run Jupyter, you might use the following command:
 $ python3 -m jupyter notebook
 ```
 
-## Quick Setup Script
+## Quick Setup Scripts
 
 **Use Case:** The user wants to rapidly deploy a local Jupyter instance with 
 ScalaTion notebook support.
@@ -56,8 +56,8 @@ ScalaTion notebook support.
 A quick setup script is provided that creates an independent Python 3 virtual 
 environment using [`virtualenv`](https://virtualenv.pypa.io/en/stable/) and 
 installs everything you need to get started with Jupyter, ScalaTion Kernel,
-and ScalaTion 1.3. To inspect this script before you run it, see
-[`quick_setup_1.3.sh`](quick_setup_1.3.sh). To download and run the script, you
+and ScalaTion 1.4. To inspect this script before you run it, see
+[`quick_setup_1.4.sh`](quick_setup_1.4.sh). To download and run the script, you
 have two options, outlined below, depending on whether or not you have Git 
 installed. These instructions assume you are using one of Linux, MacOS, or 
 Windows 10 (with 
@@ -70,7 +70,7 @@ from a subdirectory called `scalation_kernel` (created for you):
 ```
 $ git clone https://github.com/scalation/scalation_kernel.git
 $ cd scalation_kernel
-$ bash quick_setup_1.3.sh
+$ bash quick_setup_1.4.sh
 ```
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
@@ -85,7 +85,7 @@ file and extract it. By default, the directory should be named
 directory, and run the following commands to setup and run everything
 from within this directory:
 ```
-$ bash quick_setup_1.3.sh
+$ bash quick_setup_1.4.sh
 ```
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
@@ -106,16 +106,16 @@ University System of Georgia.
 
 The development version of ScalaTion Kernel is hosted [here](https://github.com/scalation/scalation_kernel/) on GitHub.
 Installation requires a recent ScalaTion distribution (>= 1.3) from
-[here](http://cobweb.cs.uga.edu/~jam/scalation.html). To install
-the development version of **Scalation Kernel**, you can use the
-following commands commands:
+[here](http://cobweb.cs.uga.edu/~jam/scalation.html). Make sure that
+the `SCALATION_JARS` environment variable is set appropriately as
+described in [General Instructions](#general-instructions) before
+continuing. To install the development version of **Scalation Kernel**,
+you can use the following commands:
 
 ```
 $ git clone https://github.com/scalation/scalation_kernel.git
 $ python3 -m pip install -U pip
 $ python3 -m pip install -e scalation_kernel
-$ export SCALATION_MATHSTAT_JAR=/path/to/scalation_mathstat.jar
-$ export SCALATION_MODELING_JAR=/path/to/scalation_modeling.jar
 $ python3 -m scalation_kernel.install
 ```
 
@@ -125,5 +125,4 @@ with Jupyter. To run Jupyter, you might use the following command:
 ```
 $ python3 -m jupyter notebook
 ```
-
 
