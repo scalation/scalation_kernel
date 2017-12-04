@@ -1,8 +1,5 @@
 # Scalation Kernel
 
-* https://github.com/scalation/scalation_kernel/
-* https://pypi.python.org/pypi/scalation-kernel/
-
 ## Overview
 
 The **Scalation Kernel** project provides a lightweight
@@ -11,6 +8,9 @@ The **Scalation Kernel** project provides a lightweight
 [Jupyter](https://jupyter.readthedocs.io/en/latest/) notebooks. 
 More information is available on the
 [project page](https://github.com/scalation/scalation_kernel).
+
+* GitHub Project Page: https://github.com/scalation/scalation_kernel/
+* PyPI Release Page: https://pypi.python.org/pypi/scalation-kernel/
 
 ## Installation
 
