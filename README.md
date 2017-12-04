@@ -1,5 +1,8 @@
 # Scalation Kernel
 
+* https://github.com/scalation/scalation_kernel/
+* https://pypi.python.org/pypi/scalation-kernel/
+
 ## Overview
 
 The **Scalation Kernel** project provides a lightweight
