@@ -11,6 +11,9 @@ The **Scalation Kernel** project provides a lightweight
 information is available on the `project
 page <https://github.com/scalation/scalation_kernel>`__.
 
+-  GitHub Project Page: https://github.com/scalation/scalation_kernel/
+-  PyPI Release Page: https://pypi.python.org/pypi/scalation-kernel/
+
 Installation
 ------------
 
