@@ -57,6 +57,8 @@ val v = VectorD((0 until 100).map(_ + e.gen))
 ::plotv v
 ````
 
+! [PlotV Example](https://imgur.com/bvz2vV9.png)
+
 ### `::plotm`
 
 The `::plotm` command plots columns from one or more ScalaTion matrices.
@@ -88,6 +90,8 @@ def makeCol(j: Int) = VectorD((0 until 100).map(y(j)(_)))
 val m = MatrixD((0 to 3).map(makeCol(_)))
 ::plotm m
 ````
+
+! [PlotM Example](https://imgur.com/dSPN0t5.png)
 
 ## Formatters
 
