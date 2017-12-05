@@ -57,7 +57,7 @@ val v = VectorD((0 until 100).map(_ + e.gen))
 ::plotv v
 ````
 
-! [PlotV Example](https://imgur.com/bvz2vV9.png)
+![PlotV Example](https://imgur.com/bvz2vV9.png)
 
 ### `::plotm`
 
@@ -91,7 +91,7 @@ val m = MatrixD((0 to 3).map(makeCol(_)))
 ::plotm m
 ````
 
-! [PlotM Example](https://imgur.com/dSPN0t5.png)
+![PlotM Example](https://imgur.com/dSPN0t5.png)
 
 ## Formatters
 
