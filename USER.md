@@ -35,22 +35,59 @@ The `::plotv` command plots one or more ScalaTion vectors.
 ```
 ::plotv  [--title TITLE] [--xlabel XLABEL] [--ylabel YLABEL] V [V ...]
 ```
+
+#### Arguments
+
 * `V` - a ScalaTion vector
 * `--title TITLE` - plot title
 * `--xlabel XLABEL` -  x-axis label
 * `--ylabel YLABEL` - y-axis label
 
+#### Example
+
+The following example plots a vector representing the function `y = x + e` where
+`e` is i.i.d. according to Normal distribution with mean zero and variance
+ten:
+
+````
+import scalation.linalgebra.VectorD
+import scalation.random.Normal
+val e = Normal(0, 10)
+val v = VectorD((0 until 100).map(_ + e.gen))
+::plotv v
+````
+
 ### `::plotm`
 
 The `::plotm` command plots columns from one or more ScalaTion matrices.
 
+
 ```
 ::plotm  [--title TITLE] [--xlabel XLABEL] [--ylabel YLABEL] M [M ...]
 ```
+
+#### Arguments
+
 * `M` - a ScalaTion matrix
 * `--title TITLE` - plot title
 * `--xlabel XLABEL` -  x-axis label
 * `--ylabel YLABEL` - y-axis label
+
+#### Example
+
+The following example plots a matrix where each column represents the function
+ `y_j = x + (100 * j) + e` where `e` is i.i.d. according to Normal distribution 
+with mean zero and variance one hundred:
+
+````
+import scalation.linalgebra.{MatrixD, VectorD}
+import scalation.random.Normal
+val e = Normal(0, 100)
+def y(j: Int)(x: Double) = x + (100 * j) + e.gen
+def makeCol(j: Int) = VectorD((0 until 100).map(y(j)(_)))
+val m = MatrixD((0 to 3).map(makeCol(_)))
+::plotm m
+````
 
 ## Formatters
 
