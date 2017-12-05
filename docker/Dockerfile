@@ -11,16 +11,16 @@ RUN apk add --no-cache bash alpine-sdk git python3 python3-dev libzmq
 RUN python3 -m pip install --upgrade pip \
     && python3 -m pip install jupyter
 
-
 # download and install oracle java 9
+# server-jre: http://download.java.net/java/jdk9-alpine/archive/181/binaries/serverjre-9-ea+181_linux-x64-musl_bin.tar.gz
+#        jdk: http://download.java.net/java/jdk9-alpine/archive/181/binaries/jdk-9-ea+181_linux-x64-musl_bin.tar.gz
 RUN set -ex && \
-    wget http://download.java.net/java/jdk9-alpine/archive/181/binaries/jdk-9-ea+181_linux-x64-musl_bin.tar.gz -O jdk.tar.gz && \
-    mkdir -p /opt/jdk && \
-    tar zxf jdk.tar.gz -C /opt/jdk --strip-components=1 && \
-    rm jdk.tar.gz && \
-    rm /opt/jdk/lib/src.zip
+    wget http://download.java.net/java/jdk9-alpine/archive/181/binaries/serverjre-9-ea+181_linux-x64-musl_bin.tar.gz -O java.tar.gz && \
+    mkdir -p /opt/java && \
+    tar zxf java.tar.gz -C /opt/java --strip-components=1 && \
+    rm java.tar.gz
 
-ENV PATH="$PATH:/opt/jdk/bin"
+ENV PATH="$PATH:/opt/java/bin"
 
 # download and install scala 2.12.4
 RUN set -ex && \
@@ -31,17 +31,21 @@ RUN set -ex && \
 
 ENV PATH="$PATH:/opt/scala/bin"
 
-# download and install scalation 1.3
+# download and install scalation 1.4
 RUN set -ex && \
-    wget http://cobweb.cs.uga.edu/~jam/scalation_1.3.tar.gz -O scalation.tar.gz && \
+    wget http://cobweb.cs.uga.edu/~jam/scalation_1.4.tar.gz -O scalation.tar.gz && \
     mkdir -p /opt/scalation && \
     tar zxf scalation.tar.gz -C /opt/scalation --strip-components=1 && \
     rm scalation.tar.gz
 
-ENV SCALATION_JARS="/opt/scalation/scalation_models/lib/scalation_mathstat_2.12-1.3.jar:/opt/scalation/scalation_models/lib/scalation_modeling_2.12-1.3.jar"
+# add scalation to the environment
+ENV SCALATION_JARS="/opt/scalation/scalation_models/lib/scalation_mathstat_2.12-1.4.jar"
+ENV SCALATION_JARS="/opt/scalation/scalation_models/lib/scalation_modeling_2.12-1.4.jar:${SCALATION_JARS}"
+ENV SCALATION_JARS="/opt/scalation/scalation_models/lib/scalation_database_2.12-1.4.jar:${SCALATION_JARS}"
 
-# download and install scalation_kernel
-RUN git clone https://github.com/scalation/scalation_kernel.git && \
+# download and install scalation_kernel development version
+RUN apk add --no-cache freetype freetype-dev libpng && \
+    git clone https://github.com/scalation/scalation_kernel.git && \
     python3 -m pip install -e scalation_kernel && \
     python3 -m scalation_kernel.install
 
