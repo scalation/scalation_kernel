@@ -34,6 +34,12 @@ It can also be done with a single command if you know the path to the
 $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
 ```
 
+If you plan on using the kernel in a
+[JupyterHub](https://jupyterhub.readthedocs.io/en/latest/) environment, then
+you must configure it to recognize the `SCALATION_JARS` environment variable
+by adjusting the `c.Spawner.env_keep` or `c.Spawner.environment` options in
+`jupyterhub_config.py` appropriately. 
+
 To install **Scalation Kernel** from PyPI, you can use the following
 commands:
 
