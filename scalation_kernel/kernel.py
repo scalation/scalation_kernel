@@ -57,22 +57,22 @@ class ScalaTionKernel(Kernel):
 
     @property
     def language_version(self):
-        return '2.12.4'
-#        code = 'println(util.Properties.versionString.replaceFirst("version ", ""))'
-#        self.child.sendline(code)
-#        self.child.expect(SCALA_PROMPT)
-#        child_output = self.child.before
-#        lines = child_output.splitlines()
-#        return lines[1]
+        """Return the Scala version that the kernel is interacting with."""
+        version_code = 'println(util.Properties.versionString.replaceFirst("version ", ""))'
+        version = do_quick(version_code)
+        return str(version)
 
     @property
     def banner(self):
-        banner_str  = 'ScalaTion Kernel {}\nAuthors: {}\nLicense: {}'
-        return banner_str.format(SCALATION_KERNEL_VERSION,
-                                 SCALATION_KERNEL_AUTHORS,
-                                 SCALATION_KERNEL_LICENSE)
+        """Return the banner message."""
+        banner_dict = { 'version': SCALATION_KERNEL_VERSION,
+                        'authors': SCALATION_KERNEL_AUTHORS,
+                        'license': SCALATION_KERNEL_LICENSE }
+        banner_str  = self.render_template(banner_template, banner_dict)
+        return banner_str
 
     def __init__(self, **kwargs):
+        """Construct the kernel."""
         Kernel.__init__(self, **kwargs)
         self.child = pexpect.spawnu(SCALA_EXEC, SCALA_OPTIONS) # start scala
         self.child.expect(SCALA_PROMPT)                        # wait for prompt
@@ -103,44 +103,42 @@ class ScalaTionKernel(Kernel):
         self.send_template_response(toggle_debug_mode_template, toggle_debug_mode_dict)
 
     def do_quick(self, code_line, evaluate = False):
+        """Quickly execute a line using the underlying REPL and, if needed, 
+           evaluate it as Python code.
+        """
         self.send_debug_response("<code>do_quick</code> with <code>{}</code>".format(code_line))
-        if isinstance(code_line, list):
-            for line in code_line:
+        if isinstance(code_line, list):           # handle code list
+            for line in code_line:                # handle each line in list
                 self.child.sendline(line)         # send each line
                 self.child.expect(SCALA_PROMPT)   # check for prompt
-        else:
-            self.child.sendline(code_line)    # send the line
-            self.child.expect(SCALA_PROMPT)   # check for prompt
+        else:                                     # handle single line
+            self.child.sendline(code_line)        # send the line
+            self.child.expect(SCALA_PROMPT)       # check for prompt
         nrows  = ceil(len(code_line) / 80)        # how many times is the input split by pexpect?
         output = self.child.before                # get entire output
         lines  = output.splitlines()              # breakup into lines
         lines  = lines[nrows:-1]                  # ignore input lines and last line
         lines = '\n'.join(lines)                  # rejoin lines
         if evaluate:
-            self.send_debug_response("attempting to call <code>ast.literal_eval</code> with <code>{}</code>".format(lines))
-            import ast
-            return ast.literal_eval(lines)
+            return self.do_ast_eval(lines)
         else:
             return lines
         
     def send_prettyr_response(self, relation):
         """Send a response with a prettier version of a ``Relation``."""
-
         self.send_debug_response("building a prettier relation for <code>{}</code>".format(relation))
-
         prettyr_dict = { 'name':     self.do_quick('println({}.name)'.format(relation)),
                          'colNames': self.do_quick('println({}.colName.mkString("[\'", "\',\'", "\']"))'.format(relation), True),
                          'data':     self.do_quick(['println((0 until {0}.rows).map({0}.row(_)'.format(relation), 
                                                     '.mkString("[\'", "\',\'", "\']"))',
                                                     '.mkString("[", ",", "]"))'.format(relation)], True) }
-
-        
         self.send_template_response(prettyr_template, prettyr_dict)
 
     def do_ast_eval(self, expression):
+        """Evaluate an expression as Python code."""
         import ast
         try:
-            return ast.literal_eval(lines)
+            return ast.literal_eval(expression)
         except Exception as e:
             debug_message = "problem calling <code>ast.literal_eval</code> with <code>{}</code>. {}".format(expression, str(e))
             self.send_debug_response(debug_message)

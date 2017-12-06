@@ -1,6 +1,11 @@
 
 from mako.template import Template
 
+banner_template = Template("""ScalaTion Kernel ${version}
+https://github.com/scalation/scalation_kernel
+Authors: ${authors}
+License: ${license}""")
+
 toggle_debug_mode_template = Template("""
 <p>
 % if debug_mode:
