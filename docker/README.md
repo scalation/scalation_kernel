@@ -1,4 +1,3 @@
-
 # ScalaTion Kernel Dockerfile
 
 [Docker](https://www.docker.com) is the easiest way to get up and running with 

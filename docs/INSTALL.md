@@ -73,12 +73,15 @@ Windows 10 (with
 ### Quick Setup using Git
 
 Open your terminal and run the following commands to setup and run everything
-from a subdirectory called `scalation_kernel` (created for you):
+in a Python 3 virtual environment under a subdirectory called `venv-dir` (which
+the script will create, if needed):
+
 ```
 $ git clone https://github.com/scalation/scalation_kernel.git
 $ cd scalation_kernel
-$ bash quick_setup_1.4.sh
+$ bash quick_setup_1.4.sh venv-dir
 ```
+
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
 
@@ -90,23 +93,29 @@ If you don't have Git installed, download the
 file and extract it. By default, the directory should be named 
 `scalation_kernel-master`. Open your terminal, change into the extracted
 directory, and run the following commands to setup and run everything
-from within this directory:
+in a Python 3 virtual environment under a subdirectory called `venv-dir` (which
+the script will create, if needed):
+
 ```
-$ bash quick_setup_1.4.sh
+$ bash quick_setup_1.4.sh venv-dir
 ```
+
 The first time the script runs, it may take some time due to downloading
 dependencies. Subsequent runs should launch Jupyter rather quickly.
 
 ## Docker Container
 
-A [`Dockerfile`](docker/Dockerfile) is availble to those with [Docker](https://www.docker.com) installed.
-Instructions on how to build and run the Docker image using the provided `Dockerfile` can be found [here](docker).
+A [`Dockerfile`](https://github.com/scalation/scalation_kernel/blob/master/docker/Dockerfile) 
+is availble to those with [Docker](https://www.docker.com) installed.
+Instructions on how to build and run the Docker image using the provided `Dockerfile` can be 
+found [here](https://github.com/scalation/scalation_kernel/tree/master/docker).
 
 ## Development Version
 
 ### Install ScalaTion Kernel from GitHub using PIP
 
-The development version of ScalaTion Kernel is hosted [here](https://github.com/scalation/scalation_kernel/) on GitHub.
+The development version of ScalaTion Kernel is hosted 
+[here](https://github.com/scalation/scalation_kernel/) on GitHub.
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 [here](http://cobweb.cs.uga.edu/~jam/scalation.html). Make sure that
 the `SCALATION_JARS` environment variable is set appropriately as

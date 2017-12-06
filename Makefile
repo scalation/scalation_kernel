@@ -1,5 +1,5 @@
 
-MDFILES=$(wildcard *.md)
+MDFILES=$(shell find ./docs -type f -name '*.md')
 TOC=markdown-toc -i
 
 prepare:
