@@ -8,7 +8,11 @@
 - [Using the ScalaTion Big Data Framework](#using-the-scalation-big-data-framework)
 - [Basic Plotting](#basic-plotting)
   * [`::plotv`](#plotv)
+    + [Arguments](#arguments)
+    + [Example](#example)
   * [`::plotm`](#plotm)
+    + [Arguments](#arguments-1)
+    + [Example](#example-1)
 - [Formatters](#formatters)
 
 <!-- tocstop -->

@@ -1,5 +1,5 @@
 
-MDFILES=$(shell find . -type f -name '*.md')
+MDFILES=$(shell find ./docs -type f -name '*.md')
 TOC=markdown-toc -i
 
 prepare:

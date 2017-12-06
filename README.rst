@@ -44,7 +44,7 @@ commands:
     $ python3 -m scalation_kernel.install
 
 More installation options are presented in the `Installation
-Guide <https://github.com/scalation/scalation_kernel/blob/master/INSTALL.md>`__,
+Guide <https://github.com/scalation/scalation_kernel/blob/master/docs/INSTALL.md>`__,
 including deployment options for Python virtual environments and Docker
 containers.
 
@@ -55,7 +55,7 @@ The *New* menu in Jupyter should show an option to create a ScalaTion
 notebook using the installed kernel.
 
 A `User
-Guide <https://github.com/scalation/scalation_kernel/blob/master/USER.md>`__
+Guide <https://github.com/scalation/scalation_kernel/blob/master/docs/USER.md>`__
 is currently under development. A complete draft is planned for the next
 minor release. Until then, please see the collection of `example
 notebooks <https://github.com/scalation/scalation_kernel/tree/master/notebooks>`__
