@@ -36,6 +36,7 @@ IMAG_PREFIX = '<scalation_kernel>:imag:'  # images
 CMD_PLOTV   = '::plotv'
 CMD_PLOTM   = '::plotm'
 CMD_PLOTF   = '::plotf'
+CMD_PLOT3D  = '::plot3d'
 CMD_DEBUG   = '::debug'
 CMD_PRETTYR = '::relation'
 
@@ -146,6 +147,53 @@ class ScalaTionKernel(Kernel):
             self.send_debug_response(debug_message)
             return None
 
+    def send_plot3d_response(self, plot_args):
+
+        self.send_debug_response("building a plot3d (matrix plot)")
+
+        from mpl_toolkits.mplot3d import Axes3D
+        from matplotlib import pyplot
+        pyplot.switch_backend('agg')
+        
+        from io import BytesIO
+        import argparse, ast, base64, shlex
+        import numpy as np
+        
+        parser = argparse.ArgumentParser(add_help=False)
+        parser.add_argument('x')
+        parser.add_argument('y')
+        parser.add_argument('z')
+        parser.add_argument('--title')
+
+        args    = parser.parse_args(shlex.split(plot_args))
+        figfile = BytesIO()
+
+        if args.title != None:
+            pyplot.title(args.title)
+
+        x = self.do_quick('println({}().mkString("[", ",", "]"))'.format(args.x), True)
+#        x = [x] * len(x)
+        x = np.array(x)
+        
+        y = self.do_quick('println({}().mkString("[", ",", "]"))'.format(args.y), True)
+ #       y = [y] * len(y)
+        y = np.array(y)
+
+        x, y = np.meshgrid(x, y)
+        
+        z = self.do_quick('println({}().map(_.mkString("[", ",", "]")).mkString("[", ",", "]"))'.format(args.z), True)
+        z = np.array(z)
+
+        fig  = pyplot.figure()
+        ax   = fig.gca(projection='3d')
+        surf = ax.plot_surface(x, y, z)
+
+        pyplot.savefig(figfile, format='png')
+        pyplot.clf()
+        figfile.seek(0)        
+        figdata_png = base64.b64encode(figfile.getvalue()).decode('utf-8')
+        self.send_image_response("data:image/png;base64,{}".format(figdata_png))
+        
     def send_plotm_response(self, plot_args):
         """Generate a plot with ``matplotlib`` using-specified ScalaTion matrices
            and options, converts it to PNG format, and sends it back to the
@@ -312,6 +360,9 @@ class ScalaTionKernel(Kernel):
 
                 elif code_line.startswith(CMD_PLOTM):
                     self.send_plotm_response(code_line[len(CMD_PLOTM):])
+
+                elif code_line.startswith(CMD_PLOT3D):
+                    self.send_plot3d_response(code_line[len(CMD_PLOT3D):])
 
                 else:
                 
