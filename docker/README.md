@@ -30,7 +30,13 @@ To get started, follow the instructions below.
    $ eval "$(docker-machine env default)"
    ```
    
-2. Build the Docker image using the provided [`Dockerfile`](Dockerfile),
+2. Get the latest copy of the Docker image using the following command:
+
+   ```
+   $ docker pull mepcotterell/scalation_kernel
+   ```
+
+   Alternatively, you can build the Docker image using the provided [`Dockerfile`](Dockerfile),
    assuming it is located in the current directory:
 
    ```
