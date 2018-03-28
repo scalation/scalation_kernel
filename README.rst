@@ -1,6 +1,11 @@
 Scalation Kernel
 ================
 
+Prerequisites
+-------------
+* Have the most recent version of Java (Java 8)
+* Have Scala downloaded
+
 Overview
 --------
 
@@ -23,17 +28,25 @@ ScalaTion, make sure the ``SCALATION_JARS`` environment variable is set
 appropriately before continuing. This can be done individually, as seen
 here:
 
+It is important to note that this is the most important step, if the environment
+variable is not correct, the program will not run properly.
+
+Steps (Terminal):
+* Find where you downloaded your copy of Scalation
+* Use pwd to get the path
+* Copy the path to use in the next steps.
+
 ::
 
-    $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
-    $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
+    $ export SCALATION_JARS=/copiedPath/scalation_mathstat.jar
+    $ export SCALATION_JARS=/copiedPath/scalation_modeling.jar:$SCALATION_JARS
 
 It can also be done with a single command if you know the path to the
 ``scalation_models`` directory:
 
 ::
 
-    $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
+    $ export SCALATION_JARS=$(find copiedPath/scalation_models/lib | grep .jar | paste -sd ":" -)
 
 To install **Scalation Kernel** from PyPI, you can use the following
 commands:
@@ -51,7 +64,7 @@ containers.
 Using ScalaTion Kernel
 ----------------------
 
-The *New* menu in Jupyter should show an option to create a ScalaTion
+The dropdown menu in Jupyter labeled * New * should show an option to create a ScalaTion
 notebook using the installed kernel.
 
 A `User
