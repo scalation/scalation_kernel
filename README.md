@@ -14,11 +14,24 @@ More information is available on the
 
 ## Installation
 
+Prerequisites
+-------------
+* Recommended to have Java 8 (1.8) downloaded 
+* Recommended Scala 2.12 downloaded
+
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 [here](http://cobweb.cs.uga.edu/~jam/scalation.html). Once you have
 ScalaTion, make sure the ``SCALATION_JARS`` environment variable is
 set appropriately before continuing. This can be done individually,
 as seen here:
+
+It is important to note that this is the most important step, if the environment
+variable is not correct, the program will not run properly.
+
+## Steps (Terminal):
+ *  Find where you downloaded your copy of ScalaTion.
+ *  Use `pwd` command to get the path location.
+ *  Copy the path to use in the next steps.
 
 ```
 $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
@@ -47,7 +60,7 @@ Docker containers.
 
 ## Using ScalaTion Kernel
 
-The *New* menu in Jupyter should show an option to create a ScalaTion
+The dropdown menu in Jupyter labeled **New** should show an option to create a ScalaTion
 notebook using the installed kernel. 
 
 A [User Guide](https://github.com/scalation/scalation_kernel/blob/master/docs/USER.md)
