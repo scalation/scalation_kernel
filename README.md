@@ -30,7 +30,7 @@ variable is not correct, the program will not run properly.
 
 ## Steps (Terminal):
  *  Find where you downloaded your copy of ScalaTion.
- *  Use pwd command to get the path location.
+ *  Use `pwd` command to get the path location.
  *  Copy the path to use in the next steps.
 
 ```
