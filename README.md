@@ -72,8 +72,8 @@ for usage examples.
 
 ## Contributors
 
- * Michael E. Cotterell<br />University of Georgia<br />`mepcott@uga.edu`
- * Dat Le-Phan<br />University of Georgia<br />`datlephan@uga.`
+ * Michael E. Cotterell <mepcott@uga.edu>
+ * Dat Le-Phan <datlephan@uga.edu>
 
 ## License
 

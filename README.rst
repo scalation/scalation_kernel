@@ -80,8 +80,8 @@ for usage examples.
 Contributors
 ------------
 
--  Michael E. CotterellUniversity of Georgia\ ``mepcott@uga.edu``
--  Dat Le-PhanUniversity of Georgia\ ``datlephan@uga.``
+-  Michael E. Cotterell mepcott@uga.edu
+-  Dat Le-Phan datlephan@uga.edu
 
 License
 -------
