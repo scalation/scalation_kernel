@@ -17,11 +17,27 @@ page <https://github.com/scalation/scalation_kernel>`__.
 Installation
 ------------
 
+Prerequisites
+~~~~~~~~~~~~~
+
+-  Java 8 (>= 8)
+-  Scala 2.12 (>= 2.12)
+
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 `here <http://cobweb.cs.uga.edu/~jam/scalation.html>`__. Once you have
 ScalaTion, make sure the ``SCALATION_JARS`` environment variable is set
 appropriately before continuing. This can be done individually, as seen
 here:
+
+It is important to note that this is the most important step, if the
+environment variable is not correct, the program will not run properly.
+
+Steps (Terminal):
+~~~~~~~~~~~~~~~~~
+
+-  Find where you downloaded your copy of ScalaTion.
+-  Use ``pwd`` command to get the path location.
+-  Copy the path to use in the next steps.
 
 ::
 
@@ -51,8 +67,8 @@ containers.
 Using ScalaTion Kernel
 ----------------------
 
-The *New* menu in Jupyter should show an option to create a ScalaTion
-notebook using the installed kernel.
+The dropdown menu in Jupyter labeled **New** should show an option to
+create a ScalaTion notebook using the installed kernel.
 
 A `User
 Guide <https://github.com/scalation/scalation_kernel/blob/master/docs/USER.md>`__
@@ -60,6 +76,12 @@ is currently under development. A complete draft is planned for the next
 minor release. Until then, please see the collection of `example
 notebooks <https://github.com/scalation/scalation_kernel/tree/master/notebooks>`__
 for usage examples.
+
+Contributors
+------------
+
+-  Michael E. CotterellUniversity of Georgia\ ``mepcott@uga.edu``
+-  Dat Le-PhanUniversity of Georgia\ ``datlephan@uga.``
 
 License
 -------

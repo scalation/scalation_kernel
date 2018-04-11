@@ -9,26 +9,27 @@ The **Scalation Kernel** project provides a lightweight
 More information is available on the
 [project page](https://github.com/scalation/scalation_kernel).
 
-* GitHub Project Page: https://github.com/scalation/scalation_kernel/
-* PyPI Release Page: https://pypi.python.org/pypi/scalation-kernel/
+ * GitHub Project Page: https://github.com/scalation/scalation_kernel/
+ * PyPI Release Page: https://pypi.python.org/pypi/scalation-kernel/
 
 ## Installation
 
-Prerequisites
--------------
-* Recommended to have Java 8 (1.8) downloaded 
-* Recommended Scala 2.12 downloaded
+### Prerequisites
+
+ * Java 8 (>= 8) 
+ * Scala 2.12 (>= 2.12)
 
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 [here](http://cobweb.cs.uga.edu/~jam/scalation.html). Once you have
-ScalaTion, make sure the ``SCALATION_JARS`` environment variable is
+ScalaTion, make sure the `SCALATION_JARS` environment variable is
 set appropriately before continuing. This can be done individually,
 as seen here:
 
 It is important to note that this is the most important step, if the environment
 variable is not correct, the program will not run properly.
 
-## Steps (Terminal):
+### Steps (Terminal):
+
  *  Find where you downloaded your copy of ScalaTion.
  *  Use `pwd` command to get the path location.
  *  Copy the path to use in the next steps.
@@ -39,7 +40,7 @@ $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
 ```
 
 It can also be done with a single command if you know the path to the
-``scalation_models`` directory:
+`scalation_models` directory:
 
 ```
 $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
@@ -68,6 +69,11 @@ is currently under development. A complete draft is planned for the next minor
 release. Until then, please see the collection of
 [example notebooks](https://github.com/scalation/scalation_kernel/tree/master/notebooks)
 for usage examples.
+
+## Contributors
+
+ * Michael E. Cotterell<br />University of Georgia<br />`mepcott@uga.edu`
+ * Dat Le-Phan<br />University of Georgia<br />`datlephan@uga.`
 
 ## License
 
