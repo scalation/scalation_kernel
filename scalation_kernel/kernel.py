@@ -167,7 +167,7 @@ class ScalaTionKernel(Kernel):
         
         parser.add_argument('//')
         parser.add_argument('/*')
-        
+        parser.add_argument('*/')
         
         
         args    = parser.parse_args(shlex.split(plot_args))
@@ -223,7 +223,7 @@ class ScalaTionKernel(Kernel):
         
         parser.add_argument('--//')
         parser.add_argument('--/*')
-        
+        parser.add_argument('--*/')
         
         
         args    = parser.parse_args(shlex.split(plot_args))
