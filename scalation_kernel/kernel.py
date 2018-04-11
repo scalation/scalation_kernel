@@ -163,6 +163,13 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('z')
         parser.add_argument('--title')
 
+        
+        
+        parser.add_argument('//')
+        parser.add_argument('/*')
+        
+        
+        
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
 
@@ -213,6 +220,12 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('--ylabel')
         parser.add_argument('--axis')
 
+        
+        parser.add_argument('--//')
+        parser.add_argument('--/*')
+        
+        
+        
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
 
