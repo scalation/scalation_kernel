@@ -47,7 +47,7 @@ The `::plotv` command plots one or more ScalaTion vectors.
 * `--xlabel XLABEL` -  x-axis label
 * `--ylabel YLABEL` - y-axis label
 * `--bar` - creates a bar graph
-* `--xkcd` - draws a graph in the art style of xkcd (Default: Line graph)
+* `--xkcd` - draws a graph in the art style of [xkcd](https://xkcd.com/) (Default: Line graph)
 * `--scatter` - creates a scatter plot
 
 #### Example
