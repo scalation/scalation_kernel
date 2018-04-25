@@ -167,7 +167,7 @@ class ScalaTionKernel(Kernel):
         
         parser.add_argument('//')
         parser.add_argument('/*')
-        
+        parser.add_argument('*/')
         
         
         args    = parser.parse_args(shlex.split(plot_args))
@@ -223,7 +223,7 @@ class ScalaTionKernel(Kernel):
         
         parser.add_argument('--//')
         parser.add_argument('--/*')
-        
+        parser.add_argument('--*/')
         
         
         args    = parser.parse_args(shlex.split(plot_args))
@@ -286,6 +286,10 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('--ylabel', help='y-axis label')
         parser.add_argument('--axis')
 
+        parser.add_argument('--bar', action='store_false', default=None)
+        parser.add_argument('--xkcd', action='store_false', default=None)
+        parser.add_argument('--scatter', action='store_false', default=None)
+        
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
 
@@ -303,7 +307,30 @@ class ScalaTionKernel(Kernel):
             pyplot.axis(args.axis)
             
         for v in args.vectors:
+            y = self.do_quick('println({}().mkString("[", ",", "]"))'.format(v), True)
+            x = np.arange(len(y))
             vec = self.do_quick('println({}().mkString("[", ",", "]"))'.format(v), True)
+        
+        if args.xkcd != None:
+            with pyplot.xkcd():
+                fig1 = pyplot.figure()
+                pyplot.plot(vec)
+
+        if (args.xkcd != None) & (args.scatter != None):
+            with pyplot.xkcd():
+                fig1 = pyplot.figure()
+                pyplot.scatter(x,y)
+
+        if (args.xkcd != None) & (args.bar != None):
+            with pyplot.xkcd():
+                fig2 = pyplot.figure()
+                pyplot.bar(x,y)
+
+        if args.scatter != None:
+            pyplot.scatter(x,y)
+        if args.bar != None:
+            pyplot.bar(x,y)
+        else:
             pyplot.plot(vec)
 
         pyplot.savefig(figfile, format='png')
