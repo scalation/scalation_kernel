@@ -9,6 +9,6 @@ prepare:
                --output=README.rst README.md
 
 release: prepare
-	python3 setup.py sdist upload -r pypi
-
+	python3 setup.py sdist
+	twine upload dist/*
 
