@@ -41,23 +41,23 @@ Steps (Terminal):
 
 ::
 
-    $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
-    $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
+   $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
+   $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
 
 It can also be done with a single command if you know the path to the
 ``scalation_models`` directory:
 
 ::
 
-    $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
+   $ export SCALATION_JARS=$(find /path/to/scalation_models/lib | grep .jar | paste -sd ":" -)
 
 To install **Scalation Kernel** from PyPI, you can use the following
 commands:
 
 ::
 
-    $ python3 -m pip install -U scalation_kernel
-    $ python3 -m scalation_kernel.install
+   $ python3 -m pip install -U scalation_kernel
+   $ python3 -m scalation_kernel.install
 
 More installation options are presented in the `Installation
 Guide <https://github.com/scalation/scalation_kernel/blob/master/docs/INSTALL.md>`__,
