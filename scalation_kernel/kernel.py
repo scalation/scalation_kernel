@@ -1,7 +1,6 @@
 
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # @author  Michael Cotterell
-# @version 1.1.x
 # @see     LICENSE (MIT style license file).
 #::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -162,13 +161,9 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('y')
         parser.add_argument('z')
         parser.add_argument('--title')
-
-        
-        
         parser.add_argument('//')
         parser.add_argument('/*')
         parser.add_argument('*/')
-        
         
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
@@ -219,12 +214,9 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('--xlabel')
         parser.add_argument('--ylabel')
         parser.add_argument('--axis')
-
-        
         parser.add_argument('--//')
         parser.add_argument('--/*')
         parser.add_argument('--*/')
-        
         
         args    = parser.parse_args(shlex.split(plot_args))
         figfile = BytesIO()
@@ -278,6 +270,7 @@ class ScalaTionKernel(Kernel):
         
         from io import BytesIO
         import argparse, ast, base64, shlex
+        import numpy as np        
         
         parser = argparse.ArgumentParser(add_help=False)
         parser.add_argument('vectors', metavar='VectorD', nargs='+', help='a ScalaTion vector')
@@ -285,7 +278,6 @@ class ScalaTionKernel(Kernel):
         parser.add_argument('--xlabel', help='x-axis label')
         parser.add_argument('--ylabel', help='y-axis label')
         parser.add_argument('--axis')
-
         parser.add_argument('--bar', action='store_false', default=None)
         parser.add_argument('--xkcd', action='store_false', default=None)
         parser.add_argument('--scatter', action='store_false', default=None)
