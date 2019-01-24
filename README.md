@@ -34,9 +34,15 @@ variable is not correct, the program will not run properly.
  *  Use `pwd` command to get the path location.
  *  Copy the path to use in the next steps.
 
+Run the following commands with "/path/to/" replaced with the file path from the `pwd` command:
 ```
 $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
 $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
+```
+Example:
+```
+$ export SCALATION_JARS=/home/mepcotterell/Downloads/scalation_1.4/scalation_mathstat.jar
+$ export SCALATION_JARS=/home/mepcotterell/Downloads/scalation_1.4/scalation_modeling.jar:$SCALATION_JARS
 ```
 
 It can also be done with a single command if you know the path to the
