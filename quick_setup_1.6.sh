@@ -129,7 +129,11 @@ source "bin/activate"
 check_scalation
 
 # setup environment variables
-export SCALATION_JARS=$(find scalation*/lib | grep .jar | paste -sd ":" -)
+JARS="."
+for JARFILE in $(find scalation*/lib | grep .jar); do 
+  JARS=$(readlink -f $JARFILE):$JARS
+done
+export SCALATION_JARS=$JARS
 
 # install python packages if needed
 python3 -m pip install --upgrade pip
