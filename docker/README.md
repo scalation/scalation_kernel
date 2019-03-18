@@ -4,7 +4,7 @@
 Jupyter and ScalaTion Kernel. When using this project's Docker image to create
 a container, the only dependency is Docker. The image includes all of the 
 additional dependencies needed to run Jupyter with support for the ScalaTion
-1.4 big data framework. 
+big data framework. 
 
 To get started, follow the instructions below.
 
@@ -33,13 +33,13 @@ To get started, follow the instructions below.
 2. Get the latest copy of the Docker image using the following command:
 
    ```
-   $ docker pull mepcotterell/scalation_kernel
+   $ docker pull mepcotterell/scalation_kernel:latest
    ```
 
-   Alternatively, you can build the Docker image using the provided [`Dockerfile`](Dockerfile),
-   assuming it is located in the current directory:
+   Alternatively, you can build the Docker images using the provided [`Dockerfile`](Dockerfile):
 
    ```
+   $ cd docker/scalation_kernel/v1.6
    $ docker build -t scalation_kernel .
    ```
 
