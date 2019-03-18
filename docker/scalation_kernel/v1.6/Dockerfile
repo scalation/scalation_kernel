@@ -1,5 +1,5 @@
-# use alpine linux
-FROM scalation_kernel_base:latest
+# use scalation kernel base
+FROM mepcotterell/scalation_kernel_base:latest
 
 # author / maintainer 
 MAINTAINER Michael E. Cotterell <mepcott@uga.edu>
