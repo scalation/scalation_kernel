@@ -54,10 +54,10 @@ To get started, follow the instructions below.
    $ docker run -it --rm -p 8888:8888 scalation_kernel
    ```
 
-4. Open Jupter using the URL provided in the output. If you cannot access it 
-   using that link, then run `docker-machine ls` to identify the IP address of 
-   your container (e.g., `tcp://IP:PORT`). Next, try the URL again, replacing 
-   `localhost` with `IP`.
+4. To open Jupter, copy the URL provided in the output and replace the placeholder 
+   ip (e87f137a781d or 127.0.0.1) with docker-machine ip and try the URL in the browser.
+   To know the docker-machine ip, run docker-machine ls command and identify the IP 
+   address of your docker-machine (e.g., tcp://IP:PORT).
 
 5. Start using ScalaTion notebooks! Consult the 
    [User Guide](https://github.com/scalation/scalation_kernel/blob/master/USER.md)
