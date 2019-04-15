@@ -56,8 +56,12 @@ To get started, follow the instructions below.
 
 4. To open Jupter, copy the URL provided in the output and replace the `placeholder IP` 
    (`e87f137a781d or 127.0.0.1`) with `docker-machine IP` and try the URL in the browser.
-   To know the docker-machine IP, run `docker-machine ls` command and identify the IP 
-   address of your docker-machine (e.g., `tcp://IP:PORT`).
+   To know the docker-machine IP, run the following command and identify the IP 
+   address (e.g., `tcp://IP:PORT`):
+   
+   ```
+   $ docker-machine ls
+   ``` 
 
 5. Start using ScalaTion notebooks! Consult the 
    [User Guide](https://github.com/scalation/scalation_kernel/blob/master/USER.md)
