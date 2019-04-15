@@ -79,6 +79,8 @@ for usage examples.
 ## Contributors
 
  * Michael E. Cotterell <mepcott@uga.edu>
+ * Kevin Bonanno <kevin.bonanno25@uga.edu>
+ * Sujeet Kulkarni <sujeet.kulkarni25@uga.edu>
  * Dat Le-Phan <datlephan@uga.edu>
 
 ## License
