@@ -39,10 +39,20 @@ Steps (Terminal):
 -  Use ``pwd`` command to get the path location.
 -  Copy the path to use in the next steps.
 
+Run the following commands with “/path/to/” replaced with the file path
+from the ``pwd`` command:
+
 ::
 
    $ export SCALATION_JARS=/path/to/scalation_mathstat.jar
    $ export SCALATION_JARS=/path/to/scalation_modeling.jar:$SCALATION_JARS
+
+Example:
+
+::
+
+   $ export SCALATION_JARS=/home/mepcotterell/Downloads/scalation_1.4/scalation_mathstat.jar
+   $ export SCALATION_JARS=/home/mepcotterell/Downloads/scalation_1.4/scalation_modeling.jar:$SCALATION_JARS
 
 It can also be done with a single command if you know the path to the
 ``scalation_models`` directory:
@@ -81,13 +91,15 @@ Contributors
 ------------
 
 -  Michael E. Cotterell mepcott@uga.edu
+-  Kevin Bonanno kevin.bonanno25@uga.edu
+-  Sujeet Kulkarni sujeet.kulkarni25@uga.edu
 -  Dat Le-Phan datlephan@uga.edu
 
 License
 -------
 
-Copyright (c) 2017 Michael E. Cotterell and the University of Georgia.
-This software is free and open source under an `MIT
+Copyright © Michael E. Cotterell and the University of Georgia. This
+software is free and open source under an `MIT
 License <https://github.com/scalation/scalation_kernel/blob/master/LICENSE.md>`__.
 The content and opinions expressed on this Web page do not necessarily
 reflect the views of nor are they endorsed by the University of Georgia
