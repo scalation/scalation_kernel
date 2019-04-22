@@ -21,7 +21,7 @@ Prerequisites
 ~~~~~~~~~~~~~
 
 -  Java 8 (>= 8)
--  Scala 2.12 (>= 2.12)
+-  Scala 2.12.8 (>= 2.12.8)
 
 Installation requires a recent ScalaTion distribution (>= 1.3) from
 `here <http://cobweb.cs.uga.edu/~jam/scalation.html>`__. Once you have
